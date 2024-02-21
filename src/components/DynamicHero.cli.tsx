@@ -3,7 +3,6 @@
 // https://en.wikipedia.org/wiki/Work_breakdown_structure
 
 import Image from 'next/image';
-import { useState } from 'react';
 import { Button } from './ui/button';
 // import {
 //     Table,
@@ -22,7 +21,7 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-import {Package, Boxes, PlusCircle} from "lucide-react";
+import {Package} from "lucide-react";
 import { Badge } from './ui/badge';
 
 type DogSize = "xs" | "s" | "m" | "l" | "xl";
@@ -215,50 +214,58 @@ const formatCurrencyNumber = (number: number, currency: isoCurrencyCode | null) 
     formatNumber(number);
 
 export default function DynamicHero() {
-    const [largeDog, setLargeDog] = useState(true);
     const totalHours = wbs.totalHours();
     return(
         <div className="flex flex-col gap-3 m-3">
             <div className="flex flex-row justify-around">
-                <Card className="">
+                <Card>
                     <CardHeader>
-                        <CardTitle>{wbs.phase} | {wbs.description}</CardTitle>
                         <CardDescription>
-                            <p>{wbs.clientId} | {wbs.clientName}</p>
-                            <p>{wbs.projectId} | {wbs.projectName}</p>
+                            <table>
+                                <tr>
+                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.clientId}</Badge></td>
+                                    <td>{wbs.clientName}</td>
+                                </tr>
+                                <tr>
+                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.projectId}</Badge></td>
+                                    <td>{wbs.projectName}</td>
+                                </tr>
+                                <tr>
+                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.phase}</Badge></td>
+                                    <td className='text-xl text-primary'><CardTitle>{wbs.description}</CardTitle></td>
+                                </tr>
+                            </table>
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p>{totalHours} hs @ {wbs.currency} <strong>{wbs.hourlyRate}</strong> per hour</p>
-                        <p>{fxFlags.get(wbs.currency)} <span className='font-extrabold text-xl'>{wbs.currency} {totalHours * wbs.hourlyRate}<sup className="text-xs">.00</sup></span></p>
+                        <p><span className='font-extrabold text-xl'>{formatCurrencyNumber(totalHours * wbs.hourlyRate, wbs.currency)}</span></p>
+                        <p><Badge variant="outline">{totalHours} hs</Badge> <Badge variant="outline">{wbs.currency}</Badge> <Badge variant="outline">{wbs.hourlyRate} per hour</Badge></p>
+                        <div className='mt-3 flex gap-2'>
+                            {Array.from(fxRates.keys()).map(
+                                function(key) {
+                                    if (key === wbs.currency) return null;
+                                    return (
+                                        <Badge key={key} variant="secondary">{
+                                            fxRates.get(key) && 
+                                            formatCurrencyNumber(
+                                                fxConvertAmount(
+                                                    (totalHours * wbs.hourlyRate),
+                                                    wbs.currency,
+                                                    key
+                                                ) || 0,
+                                                key
+                                            )
+                                        }
+                                    </Badge>
+                                    )
+                                }
+                            )}
+                        </div>
                     </CardContent>
                     <CardFooter>
-                        {Array.from(fxRates.keys()).map(
-                            function(key) {
-                                if (key === wbs.currency) return null;
-                                return (
-                                    <Badge key={key}>{
-                                        fxRates.get(key) && 
-                                        formatCurrencyNumber(
-                                            fxConvertAmount(
-                                                (totalHours * wbs.hourlyRate),
-                                                wbs.currency,
-                                                key
-                                            ) || 0,
-                                            key
-                                        )
-                                    }
-                                </Badge>
-                                )
-                            }
-                        )}
+                        <Button variant='destructive' size={"sm"} className='ml-auto'>new deliverable</Button>
                     </CardFooter>
                 </Card>
-            </div>
-
-            <div className='flex flex-row align-top justify-center gap-3'>
-                <h2 className='text-xl ml-3'><Boxes className='inline-flex mr-2' />Deliverables</h2>
-                <Button variant='destructive'>new deliverable</Button>
             </div>
 
             <div className='container flex flex-row justify-center align-top gap-3'>
@@ -275,11 +282,10 @@ export default function DynamicHero() {
                                 </CardDescription>
                             </CardContent>
                             <CardFooter>
-                                <Button variant='destructive' size={'sm'}>new task</Button>
+                                <Button variant='destructive' size={'sm'} className='ml-auto'>new task</Button>
                             </CardFooter>
                         </Card>
 
-                        {/* <h3 className='text-xl ml-3'><Boxes className='inline-flex mr-2' />Tasks</h3> */}
 
                         <div className='flex flex-col gap-3'>
                             {deliverable.tasks.map((task, index) => (
