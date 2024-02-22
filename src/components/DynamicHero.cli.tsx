@@ -33,32 +33,40 @@ const HUGE_DOG: DogSize = "xl";
 const dogSizes = [TINY_DOG, SMALL_DOG, MEDIUM_DOG, LARGE_DOG, HUGE_DOG];
 
 const dogSizeImageUrls = new Map<DogSize, string>();
-dogSizeImageUrls.set("xs", "https://cdn-icons-png.flaticon.com/512/4780/4780984.png");
-dogSizeImageUrls.set("s", "https://cdn-icons-png.flaticon.com/512/4780/4780980.png");
-dogSizeImageUrls.set("m", "https://cdn-icons-png.flaticon.com/512/4780/4780952.png");
-dogSizeImageUrls.set("l", "https://cdn-icons-png.flaticon.com/512/4781/4781006.png");
-dogSizeImageUrls.set("xl", "https://cdn-icons-png.flaticon.com/512/427/427560.png");
+dogSizeImageUrls.set(TINY_DOG, "https://cdn-icons-png.flaticon.com/512/427/427506.png");
+dogSizeImageUrls.set(SMALL_DOG, "https://cdn-icons-png.flaticon.com/512/4780/4780984.png");
+// dogSizeImageUrls.set(TINY_DOG, "https://cdn-icons-png.flaticon.com/512/4780/4780984.png");
+// dogSizeImageUrls.set(SMALL_DOG, "https://cdn-icons-png.flaticon.com/512/4780/4780980.png");
+dogSizeImageUrls.set(MEDIUM_DOG, "https://cdn-icons-png.flaticon.com/512/4780/4780952.png");
+dogSizeImageUrls.set(LARGE_DOG, "https://cdn-icons-png.flaticon.com/512/4781/4781006.png");
+dogSizeImageUrls.set(HUGE_DOG, "https://cdn-icons-png.flaticon.com/512/427/427560.png");
 
-const XS_PIC = 20;
+const XS_PIC = 10;
 const S_PIC = 25;
 const M_PIC = 30;
 const L_PIC = 35;
 const XL_PIC = 40;
 
 const dogImageSizes = new Map<DogSize, number>();
-dogImageSizes.set("xs", S_PIC);
-dogImageSizes.set("s",S_PIC);
-dogImageSizes.set("m",S_PIC);
-dogImageSizes.set("l",S_PIC);
-dogImageSizes.set("xl",S_PIC);
+dogImageSizes.set(TINY_DOG, XS_PIC);
+dogImageSizes.set(SMALL_DOG, S_PIC);
+dogImageSizes.set(MEDIUM_DOG, S_PIC);
+dogImageSizes.set(LARGE_DOG, S_PIC);
+dogImageSizes.set(HUGE_DOG, S_PIC);
 
 const dogSizeLegends = new Map<DogSize, string>();
-dogSizeLegends.set("xs", "tiny dog");
-dogSizeLegends.set("s", "small dog");
-dogSizeLegends.set("m", "medium dog");
-dogSizeLegends.set("l", "large dog");
-dogSizeLegends.set("xl", "huge/unknown dog");
+dogSizeLegends.set(TINY_DOG, "tiny");
+dogSizeLegends.set(SMALL_DOG, "small dog");
+dogSizeLegends.set(MEDIUM_DOG, "medium dog");
+dogSizeLegends.set(LARGE_DOG, "large dog");
+dogSizeLegends.set(HUGE_DOG, "huge/unknown");
 
+const dogSizeHours = new Map<DogSize, number>();
+dogSizeHours.set(TINY_DOG, 0.5);
+dogSizeHours.set(SMALL_DOG, 1);
+dogSizeHours.set(MEDIUM_DOG, 2);
+dogSizeHours.set(LARGE_DOG, 4);
+dogSizeHours.set(HUGE_DOG, 8);
 class Dog {
     static imageUrl(size: DogSize): string {
         if (!dogSizeImageUrls.has(size)) {
@@ -129,18 +137,18 @@ class Deliverable {
     hours(): number {
         let totalHours = 0;
         this.tasks.forEach((task) => {
-            totalHours += dogImageSizes.get(task.size) || 0;
+            totalHours += getDogSizeToHours(task.size) || 0;
         });
         return totalHours;
     }
 }
 
 function getDogSizeToHours(size: DogSize): number {
-    return dogImageSizes.get(size) || 0;
+    return dogSizeHours.get(size) || 0;
 }
 
 function getDogSizeCostAsString(size: DogSize, hourlyRate: number, currency: isoCurrencyCode): string {
-    return formatCurrencyNumber((dogImageSizes.get(size) || 0) * hourlyRate, currency);
+    return formatCurrencyNumber((getDogSizeToHours(size) || 0) * hourlyRate, currency);
 }
 
 class projectWBS {
@@ -150,6 +158,7 @@ class projectWBS {
     description: string;
     clientId: string;
     clientName: string;
+    clientLogoUrl: string;
     hourlyRate: number;
     currency: isoCurrencyCode;
     phase: string;
@@ -161,6 +170,7 @@ class projectWBS {
         description: string,
         clientId: string,
         clientName: string,
+        clientLogoUrl: string,
         hourlyRate: number,
         currency: isoCurrencyCode = "USD",
         phase: string,
@@ -172,6 +182,7 @@ class projectWBS {
         this.description = description;
         this.clientId = clientId;
         this.clientName = clientName;
+        this.clientLogoUrl = clientLogoUrl;
         this.hourlyRate = hourlyRate;
         this.currency = currency;
         this.phase = phase;
@@ -192,7 +203,7 @@ const MASTER_HOURLY_RATE_CURRENCY_CODE = "CAD";
 
 const currentYear = new Date().getFullYear();
 const {id: projectId, name: projectName} = generateRandomProjectName();
-const {id: clientId, name: clientName} = generateRandomClientIdAndName();
+const {id: clientId, name: clientName, logoUrl: clientLogoUrl} = generateRandomClientIdAndName();
 const phaseNr = pad(Math.floor(Math.random() * 10 + 1), 2);
 const wbs = new projectWBS(
     currentYear + "-" + pad(Math.floor(Math.random() * 100 + 1), 4),
@@ -201,6 +212,7 @@ const wbs = new projectWBS(
     "Phase " + phaseNr,
     clientId,
     clientName,
+    clientLogoUrl,
     MASTER_HOURLY_RATE,
     MASTER_HOURLY_RATE_CURRENCY_CODE,
     "P" + phaseNr,
@@ -220,26 +232,20 @@ export default function DynamicHero() {
             <div className="flex flex-row justify-around">
                 <Card>
                     <CardHeader>
+                            <div className="flex flex-row gap-3 align-top">
+                                <Image className='rounded-md w-20 h-20' src={wbs.clientLogoUrl} alt={wbs.clientName} width={50} height={50} />
                         <CardDescription>
-                            <table>
-                                <tr>
-                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.clientId}</Badge></td>
-                                    <td>{wbs.clientName}</td>
-                                </tr>
-                                <tr>
-                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.projectId}</Badge></td>
-                                    <td>{wbs.projectName}</td>
-                                </tr>
-                                <tr>
-                                    <td className='w-24 text-right mt-2 pr-3'><Badge variant="outline">{wbs.phase}</Badge></td>
-                                    <td className='text-xl text-primary'><CardTitle>{wbs.description}</CardTitle></td>
-                                </tr>
-                            </table>
+                                <div className='flex flex-col gap-1'>
+                                    <div><Badge className="w-16" variant="outline">{wbs.clientId}</Badge> {wbs.clientName}</div>
+                                    <div><Badge className="w-16" variant="outline">{wbs.projectId}</Badge> {wbs.projectName}</div>
+                                    <div><Badge className="w-16" variant="outline">{wbs.phase}</Badge> {wbs.description}</div>
+                                </div>
                         </CardDescription>
+                            </div>
                     </CardHeader>
                     <CardContent>
-                        <p><span className='font-extrabold text-xl'>{formatCurrencyNumber(totalHours * wbs.hourlyRate, wbs.currency)}</span></p>
-                        <p><Badge variant="outline">{totalHours} hs</Badge> <Badge variant="outline">{wbs.currency}</Badge> <Badge variant="outline">{wbs.hourlyRate} per hour</Badge></p>
+                        <p className='font-extrabold text-xl'>Estimated cost {formatCurrencyNumber(totalHours * wbs.hourlyRate, wbs.currency)}</p>
+                        <p><Badge variant="outline">{totalHours} hs</Badge> <Badge variant="outline">{wbs.currency} {wbs.hourlyRate}/h</Badge></p>
                         <div className='mt-3 flex gap-2'>
                             {Array.from(fxRates.keys()).map(
                                 function(key) {
@@ -330,7 +336,7 @@ function DogPic({dogSize}: {dogSize: DogSize | undefined}) {
         const size = Dog.imageSize(dogSize);
         return (
             <Badge variant='default'>
-            <Image src={url} alt={"Dog of size " + dogSize} width={size} height={size} />
+                <Image src={url} alt={"Dog of size " + dogSize} width={size} height={size} />
             </Badge>
         );
     }
@@ -429,10 +435,21 @@ function generateRandomTaskDescription(): string {
 }
 
 function generateRandomClientIdAndName() {
-    const fruitNames = ["Apple", "Banana", "Orange", "Pear", "Strawberry", "Watermelon", "Grape", "Pineapple", "Cherry", "Peach", "Plum", "Cucumber", "Carrot", "Broccoli", "Cauliflower", "Spinach", "Eggplant", "Potato", "Tomato"];
-    const legalForms = ["Limited", "LLC", "Corp", "Inc", "LLP", "Group"];
-    return ({
-        id: "C-" + pad(Math.floor(Math.random() * 100) + 1, 4),
-        name: fruitNames[Math.floor(Math.random() * fruitNames.length)] + " " + legalForms[Math.floor(Math.random() * legalForms.length)]
-    });
+    const clients = [
+        // {id: "RIT", name: "Responsive IT", logoUrl: "/RIT.cli.png"},
+        {id: "VWG", name: "Cowell Inc.", logoUrl: "/VWG.cli.jpg"},
+        {id: "LGO", name: "Lego", logoUrl: "/LGO.cli.png"},
+        {id: "NIK", name: "Nike", logoUrl: "/NIK.cli.png"},
+        {id: "OXF", name: "Oxford University", logoUrl: "/OXF.cli.png"},
+        {id: "WDP", name: "Web Design Pblo Juele", logoUrl: "/WDP.cli.jpg"},
+        {id: "CCC", name: "Montevideo Refrescos S.A.", logoUrl: "/CCC.cli.jpg"},
+        // {id: "PAC", name: "Pacto!", logoUrl: "/PAC.cli.jpg"},
+    ];
+    return clients[Math.floor(Math.random() * clients.length)];
+    // const fruitNames = ["Apple", "Banana", "Orange", "Pear", "Strawberry", "Watermelon", "Grape", "Pineapple", "Cherry", "Peach", "Plum", "Cucumber", "Carrot", "Broccoli", "Cauliflower", "Spinach", "Eggplant", "Potato", "Tomato"];
+    // const legalForms = ["Limited", "LLC", "Corp", "Inc", "LLP", "Group"];
+    // return ({
+    //     id: "C-" + pad(Math.floor(Math.random() * 100) + 1, 4),
+    //     name: fruitNames[Math.floor(Math.random() * fruitNames.length)] + " " + legalForms[Math.floor(Math.random() * legalForms.length)]
+    // });
 }
