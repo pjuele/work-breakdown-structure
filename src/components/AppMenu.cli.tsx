@@ -11,16 +11,18 @@ import {
   } from "@/components/ui/menubar"
 import { AlignJustify } from "lucide-react";
 import AppLogo from "./AppLogo.cli";
+import { useRouter } from 'next/navigation'
 
   export default function AppMenu() {
-    return (
+        const router = useRouter()
+        return (
         <div className="flex flex-row gap-3 p-3 mx-auto">
             <AppLogo />
             <Menubar className="">
                 <MenubarMenu>
                     <MenubarTrigger><AlignJustify className="w-5 h-5"/></MenubarTrigger>
                     <MenubarContent>
-                        <MenubarItem onClick={() => (alert("Clicked on Estimations!"))}>
+                        <MenubarItem onClick={() => (router.push("/wbs"))}>
                             Estimations <MenubarShortcut>⌘W</MenubarShortcut>
                         </MenubarItem>
                         <MenubarItem onClick={() => (alert("Clicked on Projects!"))}>

@@ -3,11 +3,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
 
 export default function PhaseCard({ phase }: { phase: any }) {
+    const router = useRouter();
     return (
         <Card
-        onClick={(e) => {alert(phase.name)}}
+        onClick={(e) => {router.push(`/wbs/${phase.id}`)}}
         key={phase.id}
         className='hover:cursor-pointer hover:bg-secondary hover:border-2 hover:border-destructive'>
         <CardHeader>
