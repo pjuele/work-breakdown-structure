@@ -1,14 +1,12 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import prisma from '../../../lib/prisma';
-import { Badge } from '@/components/ui/badge';
-// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Image from 'next/image';
-import PhaseCard from '../PhaseCard.cli';
 import { ProjectWBS } from '@/models/OldClasses';
-import WBSRoot from '@/components/WBSRoot.cli';
 import { MASTER_HOURLY_RATE, MASTER_HOURLY_RATE_CURRENCY_CODE } from '@/lib/constants';
-import { Deliverable as OldDeliverable } from '../../../models/OldClasses';
-import DynamicHero from '@/components/DynamicHero.cli';
+import { Deliverable as OldDeliverable, Task as OldTask } from '../../../models/OldClasses';
+import { DogSize } from '@/lib/types';
+import BackTo from '@/components/BackTo';
+import WBSRoot from '@/components/WBSRoot.cli';
+import TreeOfDeliverables from '@/components/TreeOfDeliverables.cli';
+import PhaseTree from '@/components/PhaseTree.cli';
 
 async function getData(phaseId: number) {
     const phase = await prisma.projectPhase.findUnique({
@@ -29,16 +27,6 @@ export default async function Home({ params }: { params: any }) {
         if (!params.phaseId) return null;
         const phase = await getData(Number(params.phaseId));
         if (!phase) return null;
-        const deliverables: OldDeliverable[] = [];
-        phase.deliverables.forEach((d) => {
-            deliverables.push(new OldDeliverable(
-                d.id + "",
-                d.name + "",
-                "...",
-                [],
-            ));
-        })
-        console.dir(deliverables, { depth: 10 });
         const wbs = new ProjectWBS(
             phase.id + "",
             phase.project.id + "",
@@ -50,15 +38,33 @@ export default async function Home({ params }: { params: any }) {
             MASTER_HOURLY_RATE,
             MASTER_HOURLY_RATE_CURRENCY_CODE,
             "PH" + phase.id,
-            deliverables,
-        )
+            phase.deliverables.map((d) => new OldDeliverable(
+                d.id + "",
+                d.name + "",
+                "...",
+                d.elements.map((e) => new OldTask(
+                    e.id + "",
+                    e.name + "",
+                    e.size + "" as DogSize
+                )),
+            )),
+        );
+        const totalHoursValue = wbs.totalHours();
         return (
             <main className="mt-10 p-20">
-                <div className='flex flex-row gap-5 flex-wrap'>
-                    {/* <PhaseCard phase={phase}/>
-                    <WBSRoot wbs={wbs}/> */}
-                    <DynamicHero wbs={JSON.parse(JSON.stringify(wbs))}/>
-                </div>
+                <PhaseTree
+                    clientLogoUrl={wbs.clientLogoUrl}
+                    clientId={wbs.clientId}
+                    clientName={wbs.clientName}
+                    projectId={wbs.projectId}
+                    projectName={wbs.projectName}
+                    phase={wbs.phase}
+                    description={wbs.description}
+                    totalHoursValue={totalHoursValue}
+                    deliverables={JSON.parse(JSON.stringify(wbs.deliverables))} // FIXME: solve this class/POJO issue
+                    hourlyRate={MASTER_HOURLY_RATE}
+                    currency={MASTER_HOURLY_RATE_CURRENCY_CODE}
+                />
             </main>
         );
 
