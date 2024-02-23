@@ -7,14 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Deliverable {
-  tennantId String       // @unique
-  id        Int          @id @default(autoincrement()) //String        @id @db.VarChar(3) // 
-  name      String       @db.VarChar(255)
-  startDate DateTime?    @default(dbgenerated("CURRENT_DATE")) @db.Date
-  phaseId   String
-  parent    ProjectPhase @relation(fields: [phaseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  elements  Element[]
+model Client {
+  tennantId    String        // @unique
+  id           String        @id @db.VarChar(3) // @default(autoincrement())
+  name         String?       @db.VarChar(255)
+  color        String        @db.VarChar(50)
+  logoUrl      String        @db.VarChar(255)
+  projects Project[]
 }
 
 model Project {
@@ -29,7 +28,7 @@ model Project {
 
 model ProjectPhase {
   tennantId    String        // @unique
-  id           String        @id @db.VarChar(3) // @default(autoincrement())
+  id           Int           @id @default(autoincrement())
   name         String?       @db.VarChar(255)
   // color        String        @db.VarChar(50)
   projectId    String
@@ -37,14 +36,14 @@ model ProjectPhase {
   deliverables Deliverable[]
 }
 
-
-model Client {
-  tennantId    String        // @unique
-  id           String        @id @db.VarChar(3) // @default(autoincrement())
-  name         String?       @db.VarChar(255)
-  color        String        @db.VarChar(50)
-  logoUrl      String        @db.VarChar(255)
-  projects Project[]
+model Deliverable {
+  tennantId String       // @unique
+  id        Int          @id @default(autoincrement()) //String        @id @db.VarChar(3) // 
+  name      String       @db.VarChar(255)
+  startDate DateTime?    @default(dbgenerated("CURRENT_DATE")) @db.Date
+  phaseId   Int
+  parent    ProjectPhase @relation(fields: [phaseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  elements  Element[]
 }
 
 model Element {

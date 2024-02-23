@@ -2,8 +2,14 @@ const { PrismaClient } = require("@prisma/client");
 const seedData = require("./seed-data.js");
 const prisma = new PrismaClient();
 
-const entitiesToSeed = ["Client", "Project", "Deliverable", "Element"];
-const entitiesWithAutoIncrement = ["Deliverable", "Element"];
+const entitiesToSeed = [
+  "Client",
+  "Project",
+  "ProjectPhase",
+  "Deliverable",
+  "Element",
+];
+const entitiesWithAutoIncrement = ["ProjectPhase", "Deliverable", "Element"];
 
 const load = async () => {
   console.log("🌱 Seeding DB...");
@@ -21,11 +27,13 @@ const load = async () => {
 };
 
 function getCorrespondingDataArray(seedData, entityName) {
-  const { clients, projects, deliverables, elements } = seedData;
+  const { clients, projects, phases, deliverables, elements } = seedData;
   if (entityName === "Client") {
     return clients;
   } else if (entityName === "Project") {
     return projects;
+  } else if (entityName === "ProjectPhase") {
+    return phases;
   } else if (entityName === "Deliverable") {
     return deliverables;
   } else if (entityName === "Element") {
@@ -36,7 +44,8 @@ function getCorrespondingDataArray(seedData, entityName) {
 async function processEntity(entity) {
   const data = getCorrespondingDataArray(seedData, entity);
   if (data) {
-    const lcEntity = entity.toLowerCase();
+    const lcEntity =
+      entity === "ProjectPhase" ? "projectPhase" : entity.toLowerCase();
     if (Object.prototype.hasOwnProperty.call(prisma, lcEntity)) {
       console.log("✅ Found prisma method for entity", entity);
       await deleteMany(lcEntity);

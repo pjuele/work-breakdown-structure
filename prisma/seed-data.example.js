@@ -88,9 +88,9 @@ const projects = [
   },
   {
     tennantId: WDPJ_CLERK_ID,
-    id: "RIT",
-    name: "Rambunctious IT",
-    color: "blue",
+    id: "QRI",
+    name: "Quid Raton Ingestus",
+    color: "gray",
     clientId: "RIT",
   },
   {
@@ -99,6 +99,35 @@ const projects = [
     name: "WDPJ Admin Data in Banana DB",
     color: "lightgreen",
     clientId: "WDP",
+  },
+];
+
+// Phases to seed:
+// Only seed one "Phase I - Blah" for each project (each with a different id of course):
+const phases = [
+  {
+    tennantId: WDPJ_CLERK_ID,
+    id: 1,
+    name: "Phase I - Blah",
+    projectId: "EFF",
+  },
+  {
+    tennantId: WDPJ_CLERK_ID,
+    id: 2,
+    name: "Phase I - Blah",
+    projectId: "ZMB",
+  },
+  {
+    tennantId: WDPJ_CLERK_ID,
+    id: 3,
+    name: "Phase I - Blah",
+    projectId: "QRI",
+  },
+  {
+    tennantId: WDPJ_CLERK_ID,
+    id: 4,
+    name: "Phase I - Blah",
+    projectId: "PJD",
   },
 ];
 
@@ -111,28 +140,28 @@ const deliverables = [
     tennantId: WDPJ_CLERK_ID,
     id: 1,
     name: "Online DB for all WDPJ projects",
-    projectId: "PJD",
+    phaseId: 1,
     startDate: randomDate(),
   },
   {
     tennantId: WDPJ_CLERK_ID,
     id: 2,
     name: "Knowledge from [la-la-land]",
-    projectId: "PJD",
+    phaseId: 1,
     startDate: randomDate(),
   },
   {
     tennantId: WDPJ_CLERK_ID,
     id: 3,
     name: "Seeded Banana DB (example data)",
-    projectId: "PJD",
+    phaseId: 1,
     startDate: randomDate(),
   },
   {
     tennantId: WDPJ_CLERK_ID,
     id: 4,
     name: "[work-breakdown-system] Connected to Banana DB",
-    projectId: "PJD",
+    phaseId: 1,
     startDate: randomDate(),
   },
 ];
@@ -230,8 +259,9 @@ const elements = [
 ];
 
 module.exports = {
-  projects,
   clients,
+  projects,
+  phases,
   deliverables,
   elements,
 };

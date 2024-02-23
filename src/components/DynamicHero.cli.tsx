@@ -2,7 +2,6 @@
 
 // https://en.wikipedia.org/wiki/Work_breakdown_structure
 
-import Image from 'next/image';
 import { Button } from './ui/button';
 import {
     Card,
@@ -14,60 +13,21 @@ import {
   } from "@/components/ui/card"
 import {Package} from "lucide-react";
 import { Badge } from './ui/badge';
-import { wbs } from '@/mock-data/generators';
-import { dogSizeLegends, fxRates } from '@/lib/constants';
-import { formatCurrencyNumber, fxConvertAmount, getDogSizeCostAsString, getDogSizeToHours } from '@/lib/utils';
-import { Deliverable } from '@/models/OldClasses';
+// import { wbs } from '@/mock-data/generators';
+import { dogSizeLegends } from '@/lib/constants';
+import { getDogSizeCostAsString, getDogSizeToHours } from '@/lib/utils';
+import { Deliverable, ProjectWBS } from '@/models/OldClasses';
 import DogPic from './DogPic.cli';
+import WBSRoot from './WBSRoot.cli';
 
 
-export default function DynamicHero() {
-    const totalHours = wbs.totalHours();
+export default function DynamicHero({wbs}: {wbs: ProjectWBS}) {
+    if (!wbs) return null;
+    const totalHours = 25; //wbs.totalHours();
     return(
         <div className="flex flex-col gap-3 m-3">
             <div className="flex flex-row justify-around">
-                <Card>
-                    <CardHeader>
-                            <div className="flex flex-row gap-3 align-top">
-                                <Image className='rounded-md w-20 h-20' src={wbs.clientLogoUrl} alt={wbs.clientName} width={50} height={50} />
-                        <CardDescription>
-                                <div className='flex flex-col gap-1'>
-                                    <div><Badge className="w-16" variant="outline">{wbs.clientId}</Badge> {wbs.clientName}</div>
-                                    <div><Badge className="w-16" variant="outline">{wbs.projectId}</Badge> {wbs.projectName}</div>
-                                    <div><Badge className="w-16" variant="outline">{wbs.phase}</Badge> {wbs.description}</div>
-                                </div>
-                        </CardDescription>
-                            </div>
-                    </CardHeader>
-                    <CardContent>
-                        <p className='font-extrabold text-xl'>Estimated cost {formatCurrencyNumber(totalHours * wbs.hourlyRate, wbs.currency)}</p>
-                        <p><Badge variant="outline">{totalHours} hs</Badge> <Badge variant="outline">{wbs.currency} {wbs.hourlyRate}/h</Badge></p>
-                        <div className='mt-3 flex gap-2'>
-                            {Array.from(fxRates.keys()).map(
-                                function(key) {
-                                    if (key === wbs.currency) return null;
-                                    return (
-                                        <Badge key={key} variant="secondary">{
-                                            fxRates.get(key) && 
-                                            formatCurrencyNumber(
-                                                fxConvertAmount(
-                                                    (totalHours * wbs.hourlyRate),
-                                                    wbs.currency,
-                                                    key
-                                                ) || 0,
-                                                key
-                                            )
-                                        }
-                                    </Badge>
-                                    )
-                                }
-                            )}
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button variant='destructive' size={"sm"} className='ml-auto'>new deliverable</Button>
-                    </CardFooter>
-                </Card>
+                <WBSRoot wbs={wbs}/>
             </div>
 
             <div className='container flex flex-row justify-center align-top gap-3'>
@@ -80,7 +40,8 @@ export default function DynamicHero() {
                             <CardContent>
                                 <CardDescription>
                                     <p>{deliverable.description}</p>
-                                    <p>{deliverable.hours()} hs</p>
+                                    <p>{4} hs</p>
+                                    {/* <p>{deliverable.hours()} hs</p> */}
                                 </CardDescription>
                             </CardContent>
                             <CardFooter>
