@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "../lib/utils";
-import AppMenu from "@/components/AppMenu.cli";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -10,7 +9,7 @@ export const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Work Buster",
+  title: "workbuster",
   description: "Easy WBS tool for your agile projects.",
 };
 
@@ -27,7 +26,6 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <AppMenu />
         {children}
       </body>
     </html>

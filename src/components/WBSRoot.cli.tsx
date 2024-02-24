@@ -34,7 +34,7 @@ export default function WBSRoot(
     }
 ) {
     return (
-        <Card>
+        <Card className="bg-muted max-w-max mx-auto">
             <CardHeader>
                 <div className="flex flex-row gap-3 align-top w-full">
                     <Image className='rounded-md w-20 h-20' src={clientLogoUrl} alt={clientName} width={50} height={50} />

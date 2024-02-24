@@ -35,9 +35,9 @@ export default function PhaseTree(
     }
 ) {
     return (
-        <div className="flex flex-col gap-3 m-3">
+        <div className="flex flex-col gap-5">
         {/* <PhaseCard phase={phase}/>*/}
-            <div className="flex flex-col justify-around">
+            <div className="flex flex-col justify-around gap-3 max-w-max mx-auto">
                 <BackTo link='/wbs' pageName='phases'/>
                 <WBSRoot
                     clientLogoUrl={clientLogoUrl}

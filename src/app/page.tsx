@@ -1,10 +1,12 @@
-import DynamicHero from "@/components/DynamicHero.cli";
-import Image from "next/image";
+// import AppLogo from "@/components/AppLogo.cli";
+import Hero from "@/components/Hero.cli";
+import { Button } from "@/components/ui/button";
+import router from "next/router";
 
 export default function Home() {
-  return (
-    <main className="mt-10">
-      <DynamicHero/>
+  return (    
+    <main>
+      <Hero />
     </main>
   );
 }

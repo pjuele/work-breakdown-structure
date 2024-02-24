@@ -16,8 +16,8 @@ import { useRouter } from 'next/navigation'
   export default function AppMenu() {
         const router = useRouter()
         return (
-        <div className="flex flex-row gap-3 p-3 mx-auto">
-            <AppLogo />
+        <div className="flex flex-row align-middle justify-end gap-3 p-3 ml-auto">
+            <div className="cursor-pointer" onClick={() => (router.push("/"))}><AppLogo /></div>
             <Menubar className="">
                 <MenubarMenu>
                     <MenubarTrigger><AlignJustify className="w-5 h-5"/></MenubarTrigger>

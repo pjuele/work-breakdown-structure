@@ -51,7 +51,7 @@ export default async function Home({ params }: { params: any }) {
         );
         const totalHoursValue = wbs.totalHours();
         return (
-            <main className="mt-10 p-20">
+            <main className="px-3">
                 <PhaseTree
                     clientLogoUrl={wbs.clientLogoUrl}
                     clientId={wbs.clientId}
