@@ -1,10 +1,8 @@
 import { fxRates } from "@/lib/constants";
 import { formatCurrencyNumber, fxConvertAmount } from "@/lib/utils";
-import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
-import { Card, CardHeader, CardDescription, CardContent, CardFooter } from "./ui/card";
-import { ProjectWBS } from "@/models/OldClasses";
+import { Card, CardHeader, CardDescription, CardContent } from "./ui/card";
 import { isoCurrencyCode } from "@/lib/types";
 
 export default function WBSRoot(
@@ -75,9 +73,9 @@ export default function WBSRoot(
                     )}
                 </div>
             </CardContent>
-            <CardFooter>
+            {/* <CardFooter>
                 <Button variant='destructive' size={"sm"} className='ml-auto'>new deliverable</Button>
-            </CardFooter>
+            </CardFooter> */}
         </Card>
     )
 }

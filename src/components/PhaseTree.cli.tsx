@@ -1,7 +1,5 @@
 'use client';
 
-import { ProjectWBS } from "@/models/OldClasses";
-import BackTo from "./BackTo";
 import TreeOfDeliverables from "./TreeOfDeliverables.cli";
 import WBSRoot from "./WBSRoot.cli";
 import { isoCurrencyCode } from "@/lib/types";
@@ -35,10 +33,9 @@ export default function PhaseTree(
     }
 ) {
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-screen bg-blue-700">
         {/* <PhaseCard phase={phase}/>*/}
-            <div className="flex flex-col justify-around gap-3 max-w-max mx-auto">
-                <BackTo link='/wbs' pageName='phases'/>
+            <div className="flex flex-col justify-around gap-3 max-w-max min-w-max mx-auto">
                 <WBSRoot
                     clientLogoUrl={clientLogoUrl}
                     clientId={clientId}
@@ -53,7 +50,7 @@ export default function PhaseTree(
                 />
             </div>
              {/* <DynamicHero wbs={JSON.parse(JSON.stringify(wbs))}/> */}
-            <div className="flex flex-col gap-3 m-3">
+            <div className="flex flex-col gap-3 m-3 w-full bg-red-700">
                 <TreeOfDeliverables
                     deliverables={deliverables}
                     hourlyRate={hourlyRate}

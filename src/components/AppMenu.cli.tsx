@@ -16,12 +16,12 @@ import { useRouter } from 'next/navigation'
   export default function AppMenu() {
         const router = useRouter()
         return (
-        <div className="flex flex-row align-middle justify-end gap-3 p-3 ml-auto">
-            <div className="cursor-pointer" onClick={() => (router.push("/"))}><AppLogo /></div>
-            <Menubar className="">
+        <div className="flex flex-row justify-center lg:justify-between gap-3 p-5 m-auto">
+            <div className="cursor-pointer my-auto" onClick={() => (router.push("/"))}><AppLogo /></div>
+            <Menubar className="bg-muted ml-3 my-auto">
                 <MenubarMenu>
                     <MenubarTrigger><AlignJustify className="w-5 h-5"/></MenubarTrigger>
-                    <MenubarContent>
+                    <MenubarContent className="mr-5">
                         <MenubarItem onClick={() => (router.push("/wbs"))}>
                             Estimations <MenubarShortcut>⌘W</MenubarShortcut>
                         </MenubarItem>

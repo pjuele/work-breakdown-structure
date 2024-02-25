@@ -20,9 +20,14 @@ async function getData() {
 export default async function Home() {
     const phases = await getData();
   return (
-    <main className="mt-10 p-20">
-        <Button variant='destructive' size={'sm'} className='ml-auto mb-3'>new estimation</Button>
-        <div className='flex flex-row gap-5 flex-wrap'>
+    <main className="p-3 flex flex-col gap-5">
+        <Button
+          variant="secondary"
+          size={"sm"}
+          className="">
+            new estimation
+        </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {phases.map((phase, index) => (
               <PhaseCard key={index} phase={phase}/>
           ))}

@@ -7,16 +7,20 @@ import DogPic from "./DogPic.cli";
 import { Button } from "./ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "./ui/card";
 import { isoCurrencyCode } from "@/lib/types";
+import { ScrollArea } from "./ui/scroll-area";
+import { ScrollBar } from "./ui/scroll-area";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
     { deliverables: Deliverable[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
     return (
-        <div className='container flex flex-row justify-center align-top gap-3'>
+            <ScrollArea className="min-w-screen max-w-screen w-screen">
+            <ScrollBar color="destructive" orientation="horizontal" />
+        <div className='container flex flex-row justify-center align-top gap-3 w-full'>
             {deliverables.map((deliverable: Deliverable, index: number) => {
                 return (
-                    <div key={index} className='flex flex-col gap-3'>
+                    <div key={index} className='flex flex-col gap-3 min-w-[95vw] md:w-auto'>
                         <Card key={index} className='bg-slate-950'>
                             <CardHeader>
                                 <CardTitle><Package className='inline-flex mr-2' />{deliverable.name}</CardTitle>
@@ -55,5 +59,6 @@ export default function TreeOfDeliverables(
                 );
             })}
         </div>
+        </ScrollArea>
     );
 }

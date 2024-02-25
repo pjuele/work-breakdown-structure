@@ -3,10 +3,8 @@ import { ProjectWBS } from '@/models/OldClasses';
 import { MASTER_HOURLY_RATE, MASTER_HOURLY_RATE_CURRENCY_CODE } from '@/lib/constants';
 import { Deliverable as OldDeliverable, Task as OldTask } from '../../../models/OldClasses';
 import { DogSize } from '@/lib/types';
-import BackTo from '@/components/BackTo';
-import WBSRoot from '@/components/WBSRoot.cli';
-import TreeOfDeliverables from '@/components/TreeOfDeliverables.cli';
 import PhaseTree from '@/components/PhaseTree.cli';
+import Menu from './menu.cli';
 
 async function getData(phaseId: number) {
     const phase = await prisma.projectPhase.findUnique({
@@ -51,7 +49,8 @@ export default async function Home({ params }: { params: any }) {
         );
         const totalHoursValue = wbs.totalHours();
         return (
-            <main className="px-3">
+            <main className="p-3 flex flex-col gap-5 bg-green-700 w-screen">
+                <Menu />
                 <PhaseTree
                     clientLogoUrl={wbs.clientLogoUrl}
                     clientId={wbs.clientId}

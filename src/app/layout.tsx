@@ -11,6 +11,9 @@ export const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "workbuster",
   description: "Easy WBS tool for your agile projects.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -19,14 +22,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
+          "lg:container",
           "mx-auto min-h-screen font-sans antialiased",
           fontSans.variable
         )}
       >
         {children}
+
+        <div className="fixed bottom-3 right-3 rounded-lg bg-destructive p-3 text-lg font-extrabold">
+          <span className="inline sm:hidden">XS</span>
+          <span className="hidden sm:inline md:hidden">SM</span>
+          <span className="hidden md:inline lg:hidden">MD</span>
+          <span className="hidden lg:inline xl:hidden">LG</span>
+          <span className="hidden xl:inline 2xl:hidden">XL</span>
+          <span className="hidden 2xl:inline">2XL</span>
+        </div>
       </body>
     </html>
   );
