@@ -20,11 +20,19 @@ export class Deliverable {
   name: string;
   description: string;
   tasks: Task[];
-  constructor(id: string, name: string, description: string, tasks: Task[]) {
+  phaseId: string;
+  constructor(
+    id: string,
+    name: string,
+    description: string,
+    tasks: Task[],
+    phaseId: string
+  ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.tasks = tasks;
+    this.phaseId = phaseId;
   }
 
   hours(): number {

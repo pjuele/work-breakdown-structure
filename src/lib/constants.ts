@@ -1,5 +1,9 @@
 import { DogSize, isoCurrencyCode } from "./types";
 
+// Path placeholders:
+export const PATH_TO_QUOTATIONS = "/in/quotations";
+
+// Model constants:
 export const MASTER_HOURLY_RATE = 34;
 export const MASTER_HOURLY_RATE_CURRENCY_CODE = "CAD";
 

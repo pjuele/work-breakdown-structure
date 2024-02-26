@@ -3,6 +3,7 @@ import { Noto_Sans as FontSans } from "next/font/google";
 import { Victor_Mono as FontMono } from "next/font/google";
 import "./globals.css";
 import { cn } from "../lib/utils";
+import DebugBreakpoints from "@/components/DebugBreakpoints.cli";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "lg:container",
+          // "lg:container",
           "mx-auto min-h-screen font-sans antialiased",
           fontSans.variable,
           fontMono.variable
@@ -39,14 +40,7 @@ export default function RootLayout({
       >
         {children}
 
-        <div className="fixed top-3 left-3 rounded-lg bg-destructive p-3 text-md font-extrabold">
-          <span className="inline sm:hidden">XS</span>
-          <span className="hidden sm:inline md:hidden">SM</span>
-          <span className="hidden md:inline lg:hidden">MD</span>
-          <span className="hidden lg:inline xl:hidden">LG</span>
-          <span className="hidden xl:inline 2xl:hidden">XL</span>
-          <span className="hidden 2xl:inline">2XL</span>
-        </div>
+          <DebugBreakpoints/>
       </body>
     </html>
   );

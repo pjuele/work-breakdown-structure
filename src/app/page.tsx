@@ -5,8 +5,8 @@ import router from "next/router";
 
 export default function Home() {
   return (    
-    <main>
+    <section>
       <Hero />
-    </main>
+    </section>
   );
 }

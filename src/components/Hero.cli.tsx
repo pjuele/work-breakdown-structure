@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import { PATH_TO_QUOTATIONS } from "@/lib/constants";
 
 export default function Hero() {
     const router = useRouter();
+    // TODO: move SVGs to their own components
     return (
         <div className="p-10 pt-[10vh] w-full h-screen flex flex-col align-middle gap-5">
             <svg
@@ -29,7 +31,7 @@ export default function Hero() {
             </svg>      
 
             <Button
-                onClick={() => router.push("/wbs")}
+                onClick={() => router.push(PATH_TO_QUOTATIONS)}
                 variant={"outline"}
                 className={
                     "mx-auto max-w-max " +

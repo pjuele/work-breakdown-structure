@@ -1,7 +1,7 @@
 import { fxRates } from "@/lib/constants";
 import { formatCurrencyNumber, fxConvertAmount } from "@/lib/utils";
 import { Badge } from "./ui/badge";
-import { Card, CardHeader, CardDescription, CardContent } from "./ui/card";
+import { Card, CardHeader, CardContent } from "./ui/card";
 import { isoCurrencyCode } from "@/lib/types";
 import ProjectClientLabels from "./ProjectClientLabels.cli";
 import IdBadge from "./IdBadge.cli";
@@ -36,7 +36,7 @@ export default function WBSRoot(
         <Card className="mx-auto bg-muted w-full md:w-auto">
             <CardHeader>
                 <div className="flex flex-row gap-3 align-top w-full flex-wrap">
-                    <CardDescription className="w-full md:w-auto">
+                    {/* <CardDescription className="w-full md:w-auto"> */}
                         <ProjectClientLabels
                             phase={{
                                 project: {
@@ -53,7 +53,7 @@ export default function WBSRoot(
                             }}
                             includePhase={true}
                         />
-                    </CardDescription>
+                    {/* </CardDescription> */}
                 </div>
             </CardHeader>
 

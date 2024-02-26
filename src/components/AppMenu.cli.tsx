@@ -12,6 +12,7 @@ import {
 import { AlignJustify } from "lucide-react";
 import AppLogo from "./AppLogo.cli";
 import { useRouter } from 'next/navigation'
+import { PATH_TO_QUOTATIONS } from "@/lib/constants";
 
   export default function AppMenu() {
         const router = useRouter()
@@ -22,8 +23,8 @@ import { useRouter } from 'next/navigation'
                 <MenubarMenu>
                     <MenubarTrigger><AlignJustify className="w-5 h-5"/></MenubarTrigger>
                     <MenubarContent className="mr-5">
-                        <MenubarItem onClick={() => (router.push("/wbs"))}>
-                            Estimations <MenubarShortcut>⌘W</MenubarShortcut>
+                        <MenubarItem onClick={() => (router.push(PATH_TO_QUOTATIONS))}>
+                            Quotations <MenubarShortcut>⌘W</MenubarShortcut>
                         </MenubarItem>
                         <MenubarItem onClick={() => (alert("Clicked on Projects!"))}>
                             Projects <MenubarShortcut>⌘P</MenubarShortcut>

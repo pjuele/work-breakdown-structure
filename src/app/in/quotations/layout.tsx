@@ -10,7 +10,7 @@ export default function wbsLayout({
       <header>
         <AppMenu />
       </header>
-      <section className="w-full">{children}</section>
+      <main className="w-full">{children}</main>
     </>
   );
 }

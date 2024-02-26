@@ -1,10 +1,11 @@
 'use client';
 
+import { Deliverable } from "@/models/OldClasses";
 import TreeOfDeliverables from "./TreeOfDeliverables.cli";
 import WBSRoot from "./WBSRoot.cli";
 import { isoCurrencyCode } from "@/lib/types";
 
-export default function PhaseTree(
+export default function QuotationTree(
     {
         clientLogoUrl,
         clientId,
@@ -27,13 +28,13 @@ export default function PhaseTree(
         phase: string,
         description: string,
         totalHoursValue: number,
-        deliverables: any[],
+        deliverables: Deliverable[],
         hourlyRate: number,
         currency: isoCurrencyCode
     }
 ) {
     return (
-        <div className="flex flex-col gap-5 w-full">
+        <div className="flex flex-col gap-10 w-full">
             <WBSRoot
                 clientLogoUrl={clientLogoUrl}
                 clientId={clientId}
