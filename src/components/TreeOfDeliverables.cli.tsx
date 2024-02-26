@@ -1,7 +1,7 @@
 import { dogSizeLegends } from "@/lib/constants";
-import { getDogSizeToHours, getDogSizeCostAsString } from "@/lib/utils";
+import { getDogSizeToHours, getDogSizeCostAsString, cn } from "@/lib/utils";
 import { Deliverable } from "@/models/OldClasses";
-import { Package } from "lucide-react";
+import { Package, PlusCircle } from "lucide-react";
 import { Badge } from "./ui/badge";
 import DogPic from "./DogPic.cli";
 import { Button } from "./ui/button";
@@ -9,21 +9,39 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter }
 import { isoCurrencyCode } from "@/lib/types";
 import { ScrollArea } from "./ui/scroll-area";
 import { ScrollBar } from "./ui/scroll-area";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import { NavigationMenu, NavigationMenuLink } from "./ui/navigation-menu";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
     { deliverables: Deliverable[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
     return (
-            <ScrollArea className="min-w-screen max-w-screen w-screen">
-            <ScrollBar color="destructive" orientation="horizontal" />
-        <div className='container flex flex-row justify-center align-top gap-3 w-full'>
+        <TooltipProvider>
+        <ScrollArea className="w-full">
+        <ScrollBar color="destructive" orientation="horizontal" />
+        <div className='flex flex-row align-top gap-3 max-w-max'>
             {deliverables.map((deliverable: Deliverable, index: number) => {
                 return (
-                    <div key={index} className='flex flex-col gap-3 min-w-[95vw] md:w-auto'>
+                    <div key={index}
+                        className={cn(
+                            "flex flex-col gap-3",
+                            "min-w-[85vw] max-w-[85vw]",
+                            "md:min-w-max md:max-w-auto",
+                            // "lg:w-1/3 xl:w-1/4"
+                        )}>
                         <Card key={index} className='bg-slate-950'>
                             <CardHeader>
-                                <CardTitle><Package className='inline-flex mr-2' />{deliverable.name}</CardTitle>
+                                <CardTitle>
+                                <div className="flex flex-row flex-wrap gap-2 align-top">
+                                    <div>
+                                        <Package className='inline-flex mr-2' />
+                                    </div>
+                                    <div>
+                                        {deliverable.name}
+                                    </div>
+                                </div>
+                                        </CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>
@@ -33,7 +51,18 @@ export default function TreeOfDeliverables(
                                 </CardDescription>
                             </CardContent>
                             <CardFooter>
-                                <Button variant='destructive' size={'sm'} className='ml-auto'>new task</Button>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <NavigationMenu>
+                                        <NavigationMenuLink href='/wbs'>
+                                            <PlusCircle/>
+                                        </NavigationMenuLink>
+                                        </NavigationMenu>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        add new task
+                                    </TooltipContent>
+                                </Tooltip>
                             </CardFooter>
                         </Card>
 
@@ -60,5 +89,6 @@ export default function TreeOfDeliverables(
             })}
         </div>
         </ScrollArea>
+        </TooltipProvider>
     );
 }

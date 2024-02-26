@@ -1,10 +1,8 @@
 'use client';
 
-import { Badge } from "@/components/ui/badge";
+import ProjectClientLabels from "@/components/ProjectClientLabels.cli";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import Image from "next/image";
 import { useRouter } from 'next/navigation'
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 export default function PhaseCard({ phase }: { phase: any }) {
     const router = useRouter();
@@ -21,20 +19,7 @@ export default function PhaseCard({ phase }: { phase: any }) {
             </CardHeader>
             <CardContent>
                 <CardDescription>
-                    <div className='flex flex-row gap-2 overflow-clip'>
-                        <AspectRatio ratio={16 / 9}>
-                            <Image
-                                className='rounded-lg object-cover'
-                                src={phase.project.client.logoUrl}
-                                width={50}
-                                height={50}
-                                alt={`${phase.project.client.name} logo`} />
-                        </AspectRatio>
-                        <div>
-                            <p><Badge>{phase.project.id}</Badge> {phase.project.name}</p>
-                            <p><Badge>{phase.project.client.id}</Badge> {phase.project.client.name}</p>
-                        </div>
-                    </div>
+                    <ProjectClientLabels phase={phase} />
                 </CardDescription>
             </CardContent>
         </Card>

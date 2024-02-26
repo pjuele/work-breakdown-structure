@@ -1,10 +1,7 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import prisma from '../../lib/prisma';
-import { Badge } from '@/components/ui/badge';
-// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Image from 'next/image';
 import PhaseCard from './PhaseCard.cli';
 import { Button } from '@/components/ui/button';
+import { PlusCircle } from 'lucide-react';
 
 async function getData() {
     const phases = await prisma.projectPhase.findMany({
@@ -20,12 +17,12 @@ async function getData() {
 export default async function Home() {
     const phases = await getData();
   return (
-    <main className="p-3 flex flex-col gap-5">
+    <main className="p-3 flex flex-col gap-5 wrap">
         <Button
           variant="secondary"
           size={"sm"}
-          className="">
-            new estimation
+          className="max-w-max">
+            <PlusCircle />
         </Button>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {phases.map((phase, index) => (

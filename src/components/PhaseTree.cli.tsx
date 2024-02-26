@@ -33,29 +33,25 @@ export default function PhaseTree(
     }
 ) {
     return (
-        <div className="flex flex-col gap-5 w-screen bg-blue-700">
-        {/* <PhaseCard phase={phase}/>*/}
-            <div className="flex flex-col justify-around gap-3 max-w-max min-w-max mx-auto">
-                <WBSRoot
-                    clientLogoUrl={clientLogoUrl}
-                    clientId={clientId}
-                    clientName={clientName}
-                    projectId={projectId}
-                    projectName={projectName}
-                    phase={phase}
-                    description={description}
-                    totalHours={totalHoursValue}
-                    hourlyRate={hourlyRate}
-                    currency={currency}
-                />
-            </div>
-             {/* <DynamicHero wbs={JSON.parse(JSON.stringify(wbs))}/> */}
-            <div className="flex flex-col gap-3 m-3 w-full bg-red-700">
-                <TreeOfDeliverables
-                    deliverables={deliverables}
-                    hourlyRate={hourlyRate}
-                    currency={currency}/>
-            </div>
+        <div className="flex flex-col gap-5 w-full">
+            <WBSRoot
+                clientLogoUrl={clientLogoUrl}
+                clientId={clientId}
+                clientName={clientName}
+                projectId={projectId}
+                projectName={projectName}
+                phase={phase}
+                description={description}
+                totalHours={totalHoursValue}
+                hourlyRate={hourlyRate}
+                currency={currency}
+            />
+
+            <TreeOfDeliverables
+                deliverables={deliverables}
+                hourlyRate={hourlyRate}
+                currency={currency}/>
+
         </div>
 );
 }

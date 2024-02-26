@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { Noto_Sans as FontSans } from "next/font/google";
+import { Victor_Mono as FontMono } from "next/font/google";
 import "./globals.css";
 import { cn } from "../lib/utils";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+})
+
+export const fontMono = FontMono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 })
 
 export const metadata: Metadata = {
@@ -27,12 +33,13 @@ export default function RootLayout({
         className={cn(
           "lg:container",
           "mx-auto min-h-screen font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontMono.variable
         )}
       >
         {children}
 
-        <div className="fixed bottom-3 right-3 rounded-lg bg-destructive p-3 text-lg font-extrabold">
+        <div className="fixed top-3 left-3 rounded-lg bg-destructive p-3 text-md font-extrabold">
           <span className="inline sm:hidden">XS</span>
           <span className="hidden sm:inline md:hidden">SM</span>
           <span className="hidden md:inline lg:hidden">MD</span>
