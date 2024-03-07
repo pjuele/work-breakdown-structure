@@ -4,6 +4,7 @@ import { Deliverable } from "@/models/OldClasses";
 import TreeOfDeliverables from "./TreeOfDeliverables.cli";
 import WBSRoot from "./WBSRoot.cli";
 import { isoCurrencyCode } from "@/lib/types";
+import { DeliverableForm } from "@/app/in/quotations/[phaseId]/new/DeliverableForm.cli";
 
 export default function QuotationTree(
     {
@@ -35,18 +36,23 @@ export default function QuotationTree(
 ) {
     return (
         <div className="flex flex-col gap-10 w-full">
-            <WBSRoot
-                clientLogoUrl={clientLogoUrl}
-                clientId={clientId}
-                clientName={clientName}
-                projectId={projectId}
-                projectName={projectName}
-                phase={phase}
-                description={description}
-                totalHours={totalHoursValue}
-                hourlyRate={hourlyRate}
-                currency={currency}
-            />
+            <div className="flex flex-row gap-3 align-top justify-center">
+                <WBSRoot
+                    clientLogoUrl={clientLogoUrl}
+                    clientId={clientId}
+                    clientName={clientName}
+                    projectId={projectId}
+                    projectName={projectName}
+                    phase={phase}
+                    description={description}
+                    totalHours={totalHoursValue}
+                    hourlyRate={hourlyRate}
+                    currency={currency}
+                />
+                <div className="max-w-max border-2 border-muted rounded-lg">
+                <DeliverableForm params={{phaseId: phase.replace("PH", "")}}/>
+                </div>
+            </div>
 
             <TreeOfDeliverables
                 deliverables={deliverables}

@@ -2,7 +2,7 @@
 
 export default function DebugBreakpoints() {
     return (
-        <div className="fixed bottom-3 left-3 rounded-lg bg-destructive p-3 text-md font-extrabold">
+        <div className="fixed bottom-3 left-3 rounded-lg bg-blue-950 p-3 text-md font-extrabold">
           <span className="inline sm:hidden">XS</span>
           <span className="hidden sm:inline md:hidden">SM</span>
           <span className="hidden md:inline lg:hidden">MD</span>

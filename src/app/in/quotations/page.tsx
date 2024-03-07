@@ -1,7 +1,5 @@
 import prisma from '../../../lib/prisma';
 import PhaseCard from './PhaseCard.cli';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { NavigationMenu, NavigationMenuLink } from '@/components/ui/navigation-menu';
 import { PlusCircle } from 'lucide-react';
 import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
 import { PATH_TO_QUOTATIONS } from '@/lib/constants';

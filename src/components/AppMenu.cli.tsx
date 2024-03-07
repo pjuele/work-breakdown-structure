@@ -13,6 +13,7 @@ import { AlignJustify } from "lucide-react";
 import AppLogo from "./AppLogo.cli";
 import { useRouter } from 'next/navigation'
 import { PATH_TO_QUOTATIONS } from "@/lib/constants";
+import { ModeToggle } from "./mode-toggle.cli";
 
   export default function AppMenu() {
         const router = useRouter()
@@ -21,7 +22,10 @@ import { PATH_TO_QUOTATIONS } from "@/lib/constants";
             <div className="cursor-pointer my-auto" onClick={() => (router.push("/"))}><AppLogo /></div>
             <Menubar className="bg-muted ml-3 my-auto">
                 <MenubarMenu>
-                    <MenubarTrigger><AlignJustify className="w-5 h-5"/></MenubarTrigger>
+                    <ModeToggle/>
+                    <MenubarTrigger className="cursor-pointer hover:bg-destructive hover:animate-pulse hover:border-0">
+                        <AlignJustify className="w-5 h-5"/>
+                    </MenubarTrigger>
                     <MenubarContent className="mr-5">
                         <MenubarItem onClick={() => (router.push(PATH_TO_QUOTATIONS))}>
                             Quotations <MenubarShortcut>⌘W</MenubarShortcut>
@@ -45,4 +49,3 @@ import { PATH_TO_QUOTATIONS } from "@/lib/constants";
         </div>
     );
   }
-  

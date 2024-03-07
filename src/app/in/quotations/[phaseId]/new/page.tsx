@@ -1,6 +1,7 @@
 import { ArrowLeftCircle } from 'lucide-react';
 import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
 import { PATH_TO_QUOTATIONS } from '@/lib/constants';
+import { DeliverableForm } from './DeliverableForm.cli';
 
 export default async function Home({ params }: { params: any }) {
     try {
@@ -16,7 +17,7 @@ export default async function Home({ params }: { params: any }) {
                         }
                     ]
                 }/>
-                <h1>Adding new deliverable</h1>
+                <DeliverableForm params={params} />
             </section>
         );
 
