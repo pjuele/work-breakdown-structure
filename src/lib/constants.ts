@@ -2,6 +2,8 @@ import { DogSize, isoCurrencyCode } from "./types";
 
 // Path placeholders:
 export const PATH_TO_QUOTATIONS = "/in/quotations";
+export const PATH_TO_PROJECTS = "/in/projects";
+export const PATH_TO_CLIENTS = "/in/clients";
 
 // Model constants:
 export const MASTER_HOURLY_RATE = 34;

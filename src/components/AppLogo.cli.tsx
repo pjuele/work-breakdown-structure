@@ -14,7 +14,7 @@ export default function AppLogo({className}: {className?: string}) {
             )}>
             {/* https://looka.com/editor/173538704*/}
             <svg 
-                width="auto" height="auto"
+                width="260px"
                 viewBox="0 0 375.2277227722772 54.56615762970327"
                 className="m-auto p-0">
                 <g id="buster"

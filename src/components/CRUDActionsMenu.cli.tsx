@@ -14,7 +14,7 @@ export default function CRUDActionsMenu(
     {actions: {
         icon: JSX.Element,
         label: string,
-        url: string}[]
+        url: string | null}[]
     }
 ) {
     return (
@@ -26,11 +26,14 @@ export default function CRUDActionsMenu(
                         <NavigationMenuItem key={index}>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <NavigationMenuLink href={action.url}
-                                        className="flex flex-row align-middle gap-2 m-2">
-                                        {action.icon}
-                                        <div className="text-sm">{action.label}</div>
-                                    </NavigationMenuLink>
+                                    {action.url ?
+                                        <NavigationMenuLink href={action.url}
+                                            className="flex flex-row align-middle gap-2 m-2">
+                                            {action.icon}
+                                            <div className="text-sm">{action.label}</div>
+                                        </NavigationMenuLink> :
+                                        <>{action.icon}</>
+                                    }
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     {action.label}

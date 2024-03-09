@@ -12,7 +12,7 @@ import {
 import { AlignJustify } from "lucide-react";
 import AppLogo from "./AppLogo.cli";
 import { useRouter } from 'next/navigation'
-import { PATH_TO_QUOTATIONS } from "@/lib/constants";
+import { PATH_TO_CLIENTS, PATH_TO_PROJECTS, PATH_TO_QUOTATIONS } from "@/lib/constants";
 import { ModeToggle } from "./mode-toggle.cli";
 
   export default function AppMenu() {
@@ -30,10 +30,10 @@ import { ModeToggle } from "./mode-toggle.cli";
                         <MenubarItem onClick={() => (router.push(PATH_TO_QUOTATIONS))}>
                             Quotations <MenubarShortcut>⌘W</MenubarShortcut>
                         </MenubarItem>
-                        <MenubarItem onClick={() => (alert("Clicked on Projects!"))}>
+                        <MenubarItem onClick={() => (router.push(PATH_TO_PROJECTS))}>
                             Projects <MenubarShortcut>⌘P</MenubarShortcut>
                         </MenubarItem>
-                        <MenubarItem onClick={() => (alert("Clicked on Clients!"))}>
+                        <MenubarItem onClick={() => (router.push(PATH_TO_CLIENTS))}>
                             Clients <MenubarShortcut>⌘C</MenubarShortcut>
                         </MenubarItem>
                         <MenubarItem onClick={() => (alert("Clicked on Settings!"))}>
