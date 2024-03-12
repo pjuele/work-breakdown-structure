@@ -6,29 +6,18 @@ import { DogSize } from '@/lib/types';
 import QuotationTree from '@/components/QuotationTree.cli';
 import { ArrowLeftCircle, PlusCircle } from 'lucide-react';
 import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
+import DeliverableFormDialog from './DeliverableFormDialog.cli';
 
 export default async function Home({ params }: { params: any }) {
     try {
         if (!params.phaseId) return null;
-        const wbs = await getData(Number(params.phaseId));
+        const phaseId = Number(params.phaseId) || 0;
+        const wbs = await getData(Number(phaseId));
         if (!wbs) return null;
         const totalHoursValue = wbs.totalHours();
         return (
             <section className="p-3 flex flex-col gap-3 w-full">
-                <CRUDActionsMenu actions={
-                    [
-                        {
-                            icon: <ArrowLeftCircle/>,
-                            label: "back to list",
-                            url: PATH_TO_QUOTATIONS,
-                        },
-                        {
-                            icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
-                            label: "add deliverable",
-                            url: `${PATH_TO_QUOTATIONS}/${params.phaseId}/new`
-                        }
-                    ]
-                }/>
+                <DeliverableFormDialog phaseId={phaseId} />
                 <QuotationTree
                     clientLogoUrl={wbs.clientLogoUrl}
                     clientId={wbs.clientId}
@@ -85,7 +74,7 @@ async function getData(phaseId: number) {
         MASTER_HOURLY_RATE_CURRENCY_CODE,
         "PH" + phase.id,
         phase.deliverables.map((d) => new OldDeliverable(
-            d.id + "",
+            d.id || 0,
             d.name + "",
             "...",
             d.elements.map((e) => new OldTask(
@@ -93,7 +82,7 @@ async function getData(phaseId: number) {
                 e.name + "",
                 e.size + "" as DogSize
             )),
-            phaseId + "",
+            phaseId,
         )),
     );
     return wbs;

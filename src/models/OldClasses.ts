@@ -16,17 +16,17 @@ export class Task {
   }
 }
 export class Deliverable {
-  id: string;
+  id: number;
   name: string;
   description: string;
   tasks: Task[];
-  phaseId: string;
+  phaseId: number;
   constructor(
-    id: string,
+    id: number,
     name: string,
     description: string,
     tasks: Task[],
-    phaseId: string
+    phaseId: number
   ) {
     this.id = id;
     this.name = name;

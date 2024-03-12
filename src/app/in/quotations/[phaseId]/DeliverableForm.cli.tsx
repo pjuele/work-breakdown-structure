@@ -31,7 +31,7 @@ const formSchema = z.object({
   startDate: z.date(),
 })
 
-export function DeliverableForm({ params }: { params: any }) {
+export default function DeliverableForm({ phaseId, setOpen }: {phaseId: number, setOpen: any}) {
     const router = useRouter();
 
     // 1. Define your form.
@@ -43,8 +43,8 @@ export function DeliverableForm({ params }: { params: any }) {
       },
     })
    
-    const phaseId = Number(params.phaseId);
-    if (!phaseId) return <p>Could not find a project phase with id [{params.phaseId}]</p>;
+    // const phaseId = Number(params.phaseId);
+    if (!phaseId) return <p>Could not find a project phase with id [{phaseId}]</p>;
 
     // 2. Define a submit handler.
     async function onSubmit(data: z.infer<typeof formSchema>) {
@@ -58,16 +58,17 @@ export function DeliverableForm({ params }: { params: any }) {
             };
             await saveDeliverable(d);
             toast({
-                title: `Deliverable [${data.name}] saved!`,
-                // description: (
-                //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                //     <code className="text-white">{JSON.stringify(d, null, 2)}</code>
-                //     </pre>
-                // ),
+                title: `✅ Deliverable \"${data.name}\" saved!`,
             });
             router.refresh();
+            setOpen(false);
         } catch (error) {
             console.error("Error:", error);
+            toast({
+                title: "Error",
+                description: "Could not save deliverable",
+                variant: "destructive",
+            })
         }
     }
      

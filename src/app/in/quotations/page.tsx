@@ -1,6 +1,6 @@
 import prisma from '../../../lib/prisma';
 import PhaseCard from './PhaseCard.cli';
-import QuotationFormDialog from './new/QutationFormDialog.cli';
+import QuotationFormDialog from './QutationFormDialog.cli';
 
 async function getData() {
     const phases = await prisma.projectPhase.findMany({

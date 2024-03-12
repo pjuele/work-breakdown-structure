@@ -1,17 +1,16 @@
 'use client';
 
-import { PATH_TO_QUOTATIONS, dogSizeLegends } from "@/lib/constants";
+import { dogSizeLegends } from "@/lib/constants";
 import { getDogSizeToHours, getDogSizeCostAsString, cn, formatCurrencyNumber } from "@/lib/utils";
 import { Deliverable } from "@/models/OldClasses";
 import { Package, PlusCircle } from "lucide-react";
-import DogPic from "./DogPic.cli";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { isoCurrencyCode } from "@/lib/types";
 import { ScrollArea } from "./ui/scroll-area";
 import { ScrollBar } from "./ui/scroll-area";
 import { TooltipProvider } from "./ui/tooltip";
-import CRUDActionsMenu from "./CRUDActionsMenu.cli";
 import IdBadge from "./IdBadge.cli";
+import ElementFormDialog from "@/app/in/quotations/[phaseId]/ElementFormDialog.cli";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
@@ -48,15 +47,20 @@ function TheActualTree(
                             currency={currency}
                             />
 
-                        <CRUDActionsMenu actions={
+                        {/* <CRUDActionsMenu actions={
                             [
                                 {
-                                    icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
+                                    icon:
+                                        <PlusCircle
+                                            className="animate-pulse hover:text-destructive"
+                                            onClick={() => setOpen(true)}
+                                            />,
                                     label: "add a task  \u2193",
-                                    url: `${PATH_TO_QUOTATIONS}/${deliverable.phaseId}/${deliverable.id}/new`
+                                    url: null,
                                 }
                             ]
-                        }/>
+                        }/> */}
+                        <ElementFormDialog deliverableId={deliverable.id}/>
             
                         <div className='flex flex-col gap-3'>
                             {deliverable.tasks.map((task: any, index: number) => (

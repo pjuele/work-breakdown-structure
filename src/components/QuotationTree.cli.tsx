@@ -4,7 +4,7 @@ import { Deliverable } from "@/models/OldClasses";
 import TreeOfDeliverables from "./TreeOfDeliverables.cli";
 import WBSRoot from "./WBSRoot.cli";
 import { isoCurrencyCode } from "@/lib/types";
-import { DeliverableForm } from "@/app/in/quotations/[phaseId]/new/DeliverableForm.cli";
+import DeliverableForm from "@/app/in/quotations/[phaseId]/DeliverableForm.cli";
 
 export default function QuotationTree(
     {
@@ -49,9 +49,6 @@ export default function QuotationTree(
                     hourlyRate={hourlyRate}
                     currency={currency}
                 />
-                <div className="max-w-max border-2 border-muted rounded-lg">
-                <DeliverableForm params={{phaseId: phase.replace("PH", "")}}/>
-                </div>
             </div>
 
             <TreeOfDeliverables

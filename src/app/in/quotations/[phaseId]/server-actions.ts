@@ -14,3 +14,17 @@ export async function saveDeliverable(d: any) {
     console.error(e);
   }
 }
+
+export async function saveElement(e: any) {
+  try {
+    console.dir(e, { depth: 10 });
+    console.log("🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌");
+    await prisma.element.create({
+      data: { ...e },
+    });
+    console.log("👌 Saved element...");
+  } catch (e) {
+    console.log("🤦 There was an error...");
+    console.error(e);
+  }
+}
