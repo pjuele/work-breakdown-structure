@@ -4,10 +4,8 @@ import { ArrowLeftCircle, PlusCircle } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import DeliverableForm from './DeliverableForm.cli';
-import { ProjectPhase } from '@prisma/client';
 import { useState } from 'react';
 import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
 import { PATH_TO_QUOTATIONS } from '@/lib/constants';
@@ -35,9 +33,6 @@ const DeliverableFormDialog = ({phaseId}: {phaseId: number}) => {
           ]
       }/>
       <Dialog open={open} onOpenChange={setOpen} modal>
-        {/* <DialogTrigger>
-          <PlusCircle className="animate-pulse hover:text-destructive"/>
-        </DialogTrigger> */}
         <DialogContent>
               <DeliverableForm phaseId={phaseId} setOpen={setOpen}/>
         </DialogContent>

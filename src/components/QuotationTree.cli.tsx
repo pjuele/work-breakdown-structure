@@ -13,8 +13,9 @@ export default function QuotationTree(
         clientName,
         projectId,
         projectName,
-        phase,
-        description,
+        phaseId,
+        phaseName,
+        phaseDescription,
         totalHoursValue,
         deliverables,
         hourlyRate,
@@ -26,8 +27,9 @@ export default function QuotationTree(
         clientName: string,
         projectId: string,
         projectName: string,
-        phase: string,
-        description: string,
+        phaseId: string,
+        phaseName: string,
+        phaseDescription: string,
         totalHoursValue: number,
         deliverables: Deliverable[],
         hourlyRate: number,
@@ -43,8 +45,9 @@ export default function QuotationTree(
                     clientName={clientName}
                     projectId={projectId}
                     projectName={projectName}
-                    phase={phase}
-                    description={description}
+                    phaseId={phaseId}
+                    phaseName={phaseName}
+                    phaseDescription={phaseDescription}
                     totalHours={totalHoursValue}
                     hourlyRate={hourlyRate}
                     currency={currency}

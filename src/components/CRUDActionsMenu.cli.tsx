@@ -22,17 +22,23 @@ export default function CRUDActionsMenu(
             <TooltipProvider>
                 <NavigationMenu>
                     <NavigationMenuList>
-                    {actions.map((action, index) => (
+                    {actions.map((action, index) => {
+                        const itemContent = (
+                            <div className="flex flex-row align-middle gap-2 m-2">
+                                {action.icon}
+                                <div className="text-sm min-w-max">{action.label}</div>
+                            </div>
+                        );
+                        return (
                         <NavigationMenuItem key={index}>
                             <Tooltip>
-                                <TooltipTrigger>
+                                <TooltipTrigger className="min-w-max">
                                     {action.url ?
                                         <NavigationMenuLink href={action.url}
                                             className="flex flex-row align-middle gap-2 m-2">
-                                            {action.icon}
-                                            <div className="text-sm">{action.label}</div>
+                                            {itemContent}
                                         </NavigationMenuLink> :
-                                        <>{action.icon}</>
+                                        <>{itemContent}</>
                                     }
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -40,7 +46,7 @@ export default function CRUDActionsMenu(
                                 </TooltipContent>
                             </Tooltip>
                         </NavigationMenuItem>
-                    ))}
+                        )})}
                     </NavigationMenuList>
                 </NavigationMenu>
             </TooltipProvider>

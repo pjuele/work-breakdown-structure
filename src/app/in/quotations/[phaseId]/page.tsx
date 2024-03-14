@@ -24,8 +24,9 @@ export default async function Home({ params }: { params: any }) {
                     clientName={wbs.clientName}
                     projectId={wbs.projectId}
                     projectName={wbs.projectName}
-                    phase={wbs.phase}
-                    description={wbs.description}
+                    phaseId={wbs.phaseId}
+                    phaseName={wbs.phaseName}
+                    phaseDescription={wbs.phaseDescription}
                     totalHoursValue={totalHoursValue}
                     deliverables={JSON.parse(JSON.stringify(
                         wbs.deliverables.map((deliverable: OldDeliverable) => {
@@ -64,9 +65,10 @@ async function getData(phaseId: number) {
     if (!phase) return null;
     const wbs = new ProjectWBS(
         phase.id + "",
+        phase.name + "",
+        phase.description + "",
         phase.project.id + "",
         phase.project.name + "",
-        phase.name + "",
         phase.project.client.id + "",
         phase.project.client.name + "",
         phase.project.client.logoUrl,

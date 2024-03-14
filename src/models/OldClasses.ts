@@ -45,10 +45,11 @@ export class Deliverable {
 }
 
 export class ProjectWBS {
-  id: string;
+  phaseId: string;
+  phaseName: string;
+  phaseDescription: string;
   projectId: string;
   projectName: string;
-  description: string;
   clientId: string;
   clientName: string;
   clientLogoUrl: string;
@@ -57,10 +58,11 @@ export class ProjectWBS {
   phase: string;
   deliverables: Deliverable[];
   constructor(
-    id: string,
+    phaseId: string,
+    phaseName: string,
+    phaseDescription: string,
     projectId: string,
     projectName: string,
-    description: string,
     clientId: string,
     clientName: string,
     clientLogoUrl: string,
@@ -69,10 +71,11 @@ export class ProjectWBS {
     phase: string,
     deliverables: Deliverable[]
   ) {
-    this.id = id;
+    this.phaseId = phaseId;
+    this.phaseName = phaseName;
+    this.phaseDescription = phaseDescription;
     this.projectId = projectId;
     this.projectName = projectName;
-    this.description = description;
     this.clientId = clientId;
     this.clientName = clientName;
     this.clientLogoUrl = clientLogoUrl;

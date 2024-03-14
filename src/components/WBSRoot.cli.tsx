@@ -5,6 +5,7 @@ import { Card, CardHeader, CardContent } from "./ui/card";
 import { isoCurrencyCode } from "@/lib/types";
 import ProjectClientLabels from "./ProjectClientLabels.cli";
 import IdBadge from "./IdBadge.cli";
+import { Separator } from "@radix-ui/react-menubar";
 
 export default function WBSRoot(
     {
@@ -13,8 +14,9 @@ export default function WBSRoot(
         clientName,
         projectId,
         projectName,
-        phase,
-        description,
+        phaseId,
+        phaseName,
+        phaseDescription,
         totalHours,
         hourlyRate,
         currency,
@@ -25,8 +27,9 @@ export default function WBSRoot(
         clientName: string,
         projectId: string,
         projectName: string,
-        phase: string,
-        description: string,
+        phaseId: string,
+        phaseName: string,
+        phaseDescription: string,
         totalHours: number,
         hourlyRate: number,
         currency: isoCurrencyCode
@@ -48,11 +51,14 @@ export default function WBSRoot(
                                         logoUrl: clientLogoUrl
                                     }
                                 },
-                                id: phase,
-                                name: description
+                                id: phaseId,
+                                name: phaseName
                             }}
                             includePhase={true}
                         />
+                        <Separator className="w-full" />
+                        <p className="prose"><small>{phaseDescription}</small></p>
+                        <Separator className="w-full" />
                     {/* </CardDescription> */}
                 </div>
             </CardHeader>

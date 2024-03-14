@@ -15,10 +15,23 @@ export async function saveDeliverable(d: any) {
   }
 }
 
+// Elements - - - - - - - - - - - - - - - - - - - - -
+
 export async function saveElement(e: any) {
   try {
     console.dir(e, { depth: 10 });
-    console.log("🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌");
+    await prisma.element.create({
+      data: { ...e },
+    });
+    console.log("👌 Saved element...");
+  } catch (e) {
+    console.log("🤦 There was an error...");
+    console.error(e);
+  }
+}
+
+export async function deleteElement(e: any) {
+  try {
     await prisma.element.create({
       data: { ...e },
     });

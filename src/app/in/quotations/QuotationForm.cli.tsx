@@ -22,11 +22,11 @@ import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
-  description: z.string().min(1).max(400),
+  description: z.string().max(400),
   projectId: z.string().min(1).max(3),
 })
 
-const QuotationForm = () => {
+const QuotationForm = ({ setOpen }: {setOpen: any}) => {
     const router = useRouter();
 
     // 1. Define your form.
@@ -68,6 +68,7 @@ const QuotationForm = () => {
                 // ),
             });
             router.refresh();
+            setOpen(false);
         } catch (error) {
             console.error("Error:", error);
         }
