@@ -5,13 +5,11 @@ import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
 } from "@/components/ui/dialog"
-import QuotationForm from './QuotationForm.cli';
+import ClientForm from './ClientForm.cli';
 import { useState } from 'react';
-import { Project } from '@prisma/client';
 
-const QuotationFormDialog = ({allProjects}: {allProjects: Project[]}) => {
+const ClientFormDialog = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -23,18 +21,18 @@ const QuotationFormDialog = ({allProjects}: {allProjects: Project[]}) => {
                 className="animate-pulse hover:text-destructive"
                 onClick={() => setOpen(true)}
                 />,
-            label: "new Phase quotation",
+            label: "new client",
             url: null,
           }
         ]
       }/>
       <Dialog open={open} onOpenChange={setOpen} modal>
         <DialogContent>
-              <QuotationForm setOpen={setOpen} allProjects={allProjects}/>
+              <ClientForm setOpen={setOpen}/>
         </DialogContent>
       </Dialog>
     </>
   )
 }
 
-export default QuotationFormDialog;
+export default ClientFormDialog;

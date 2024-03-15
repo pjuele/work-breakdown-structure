@@ -11,11 +11,20 @@ import { ScrollBar } from "./ui/scroll-area";
 import { TooltipProvider } from "./ui/tooltip";
 import IdBadge from "./IdBadge.cli";
 import ElementFormDialog from "@/app/in/quotations/[phaseId]/ElementFormDialog.cli";
+import { useEffect, useState } from "react";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
     { deliverables: Deliverable[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
+    const [finishedRendering, setFinishedRendering] = useState(false);
+
+    useEffect(() => {
+        setFinishedRendering(true);
+    }, []);
+
+    if (!finishedRendering) return null;
+
     return (
         <TooltipProvider>
             <ScrollArea className="w-full">
@@ -47,19 +56,6 @@ function TheActualTree(
                             currency={currency}
                             />
 
-                        {/* <CRUDActionsMenu actions={
-                            [
-                                {
-                                    icon:
-                                        <PlusCircle
-                                            className="animate-pulse hover:text-destructive"
-                                            onClick={() => setOpen(true)}
-                                            />,
-                                    label: "add a task  \u2193",
-                                    url: null,
-                                }
-                            ]
-                        }/> */}
                         <ElementFormDialog deliverableId={deliverable.id}/>
             
                         <div className='flex flex-col gap-3'>
@@ -86,6 +82,16 @@ function DeliverableCard(
         currency: isoCurrencyCode,
     }
 ) {
+    const [finishedRendering, setFinishedRendering] = useState(false);
+
+    useEffect(() => {
+        setFinishedRendering(true);
+    }, []);
+
+    if (!finishedRendering) return null;
+    console.dir(deliverable, {depth: 10});
+    console.log(typeof deliverable);
+
     return (
         <Card key={index} className='bg-slate-950'>
             <CardHeader>
@@ -100,9 +106,14 @@ function DeliverableCard(
                 </div>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-row gap-2">
-                <IdBadge id={`${deliverable.totalHours} hs`} />
-                <IdBadge id={formatCurrencyNumber(deliverable.totalHours * hourlyRate, currency) + ""}/>
+            <CardContent className="flex flex-col gap-2">
+                {deliverable.startDate &&
+                    <small>Start date: {new Date(deliverable.startDate).toLocaleDateString()}</small>
+                }
+                <div className="flex flex-row gap-1">
+                    <IdBadge id={`${deliverable.totalHours} hs`} />
+                    <IdBadge id={formatCurrencyNumber(deliverable.totalHours * hourlyRate, currency) + ""}/>
+                </div>
             </CardContent>
         </Card>
     );

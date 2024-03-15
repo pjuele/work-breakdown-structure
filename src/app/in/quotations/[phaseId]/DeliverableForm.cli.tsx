@@ -25,6 +25,7 @@ import { Separator } from "@/components/ui/separator"
 import { saveDeliverable } from "./server-actions"
 // import { redirect, useRouter } from 'next/navigation'
 import { useRouter } from "next/navigation"
+import { DatePicker } from "@/components/DatePicker.cli"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -97,42 +98,55 @@ export default function DeliverableForm({ phaseId, setOpen }: {phaseId: number, 
                     control={form.control}
                     name="startDate"
                     render={({ field }) => (
-                        <FormItem className="flex flex-col">
+                    <FormItem className="flex flex-col">
                         <FormLabel>Start date</FormLabel>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                            <FormControl>
-                                <Button
-                                variant={"outline"}
-                                className={cn(
-                                    "w-[240px] pl-3 text-left font-normal",
-                                    !field.value && "text-muted-foreground"
-                                )}
-                                >
-                                {field.value ? (
-                                    format(field.value, "PPP")
-                                ) : (
-                                    <span>Pick a date</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                </Button>
-                            </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                disabled={(date) =>
-                                date > new Date() || date < new Date("1900-01-01")
-                                }
-                                initialFocus
-                            />
-                            </PopoverContent>
-                        </Popover>
-                        <FormDescription/>
+                        <FormControl>
+                        <DatePicker
+                            selected={field.value}
+                            onSelect={(value: string) => {
+                            field.onChange(value)
+                            }}
+                        />
+                        </FormControl>
                         <FormMessage />
-                        </FormItem>
+                    </FormItem>
+
+                        // <FormItem className="flex flex-col">
+                        // <FormLabel>Start date</FormLabel>
+                        // <Popover>
+                        //     <PopoverTrigger asChild>
+                        //     <FormControl>
+                        //         <Button
+                        //         variant={"outline"}
+                        //         className={cn(
+                        //             "w-[240px] pl-3 text-left font-normal",
+                        //             !field.value && "text-muted-foreground"
+                        //         )}
+                        //         >
+                        //         {field.value ? (
+                        //             format(field.value, "PPP")
+                        //         ) : (
+                        //             <span>Pick a date</span>
+                        //         )}
+                        //         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        //         </Button>
+                        //     </FormControl>
+                        //     </PopoverTrigger>
+                        //     <PopoverContent className="w-auto p-0" align="start">
+                        //     <Calendar
+                        //         mode="single"
+                        //         selected={field.value}
+                        //         onSelect={field.onChange}
+                        //         disabled={(date) =>
+                        //         date > new Date() || date < new Date("1900-01-01")
+                        //         }
+                        //         initialFocus
+                        //     />
+                        //     </PopoverContent>
+                        // </Popover>
+                        // <FormDescription/>
+                        // <FormMessage />
+                        // </FormItem>
                     )}
                     />
                 <Button variant={"destructive"} type="submit">Submit</Button>

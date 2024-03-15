@@ -1,20 +1,26 @@
+import AppTitle from '@/components/AppTitle.cli';
 import prisma from '../../../lib/prisma';
+import ProjectFormDialog from './ProjectFormDialog.cli';
+import ProjectList from './ProjectList.cli';
 
 async function getData() {
     const projects = await prisma.project.findMany({
         // where: { published: true },
         include: { client: true },
       });
-      return projects;
+    const clients = await prisma.client.findMany();
+    return {projects, clients};
 }
+
 export default async function Home() {
-    const projects = await getData();
+    const { projects, clients } = await getData();
   return (
     <section className="p-3 flex flex-col gap-5 wrap">
-      <h1>Projects</h1>
-      {projects.map((project) => (
-        <p key={project.id}>{project.name}</p>
-      ))}
+      <div className="flex flex-row gap-5 align-top justify-center mx-auto">
+        <AppTitle size="lg" title="Projects" />
+        <ProjectFormDialog allClients={clients}/>
+      </div>
+      <ProjectList projects={projects}/>
     </section>
   );
 }

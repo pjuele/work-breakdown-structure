@@ -19,23 +19,26 @@ export class Deliverable {
   id: number;
   name: string;
   description: string;
+  startDate?: Date;
   tasks: Task[];
   phaseId: number;
   constructor(
     id: number,
     name: string,
     description: string,
+    startDate: Date | undefined,
     tasks: Task[],
     phaseId: number
   ) {
     this.id = id;
     this.name = name;
     this.description = description;
+    this.startDate = startDate;
     this.tasks = tasks;
     this.phaseId = phaseId;
   }
 
-  hours(): number {
+  public hours(): number {
     let totalHours = 0;
     this.tasks.forEach((task) => {
       totalHours += getDogSizeToHours(task.size) || 0;

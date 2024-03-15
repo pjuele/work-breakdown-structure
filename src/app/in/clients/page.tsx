@@ -1,17 +1,22 @@
+import AppTitle from '@/components/AppTitle.cli';
 import prisma from '../../../lib/prisma';
+import ClientFormDialog from './ClientFormDialog.cli';
+import ClientList from './ClientList.cli';
 
 async function getData() {
     const clients = await prisma.client.findMany();
-      return clients;
+    return clients;
 }
+
 export default async function Home() {
     const clients = await getData();
   return (
     <section className="p-3 flex flex-col gap-5 wrap">
-      <h1>Clients</h1>
-      {clients.map((client) => (
-        <p key={client.id}>{client.name}</p>
-      ))}
+      <div className="flex flex-row gap-5 align-top justify-center mx-auto">
+        <AppTitle size="lg" title="Clients" />
+        <ClientFormDialog/>
+      </div>
+      <ClientList clients={clients}/>
     </section>
   );
 }

@@ -20,7 +20,18 @@ import { Separator } from "@/components/ui/separator"
 import { saveElement } from "./server-actions"
 import { useRouter } from "next/navigation"
 import { Package } from "lucide-react"
-
+import { dogSizes } from "@/lib/constants"
+import { Badge } from "@/components/ui/badge"
+import DogPic from "@/components/DogPic.cli"
+import { DogSize } from "@/lib/types"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
+  
 const formSchema = z.object({
   name: z.string().min(1).max(255),
   size: z.enum(["xs", "s", "m", "l", "xl"]),
@@ -44,7 +55,6 @@ export default function ElementForm({ deliverableId, setOpen }: {deliverableId: 
     // 2. Define a submit handler.
     async function onSubmit(data: z.infer<typeof formSchema>) {
         try {
-            console.log("🍌🍌🍌🍌🍌deliverableId", deliverableId);
             const e = {
                 tennantId: "user_2cjaSqnQ5RTHCGRC3B567A1uJm0",
                 deliverableId,
@@ -95,7 +105,23 @@ export default function ElementForm({ deliverableId, setOpen }: {deliverableId: 
                         <FormItem>
                             <FormLabel/>
                             <FormControl>
-                                <Input placeholder="xs / s / m / l / xl?" {...field} />
+                                <div className="flex flex-col gap-2">
+                                    <Select value={field.value} onValueChange={field.onChange}>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Dog size" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {dogSizes.map((s: string) =>
+                                            <SelectItem key={s} value={s}>
+                                                <div key={s} className="flex flex-row align-middle gap-2">
+                                                    <Badge key={s} variant={"outline"}>{s}</Badge>
+                                                    <DogPic key={s} dogSize={s as DogSize} />
+                                                </div>
+                                            </SelectItem>
+                                        )}
+                                    </SelectContent>
+                                    </Select>
+                                </div>
                             </FormControl>
                             <FormDescription/>
                             <FormMessage />

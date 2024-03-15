@@ -79,6 +79,7 @@ async function getData(phaseId: number) {
             d.id || 0,
             d.name + "",
             "...",
+            d.startDate ?? undefined,
             d.elements.map((e) => new OldTask(
                 e.id + "",
                 e.name + "",

@@ -17,24 +17,24 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { Separator } from "@/components/ui/separator"
-import { saveProjectPhaseQuotation } from "./server-actions"
+import { saveProject } from "./server-actions"
 import { useRouter } from "next/navigation"
-import { SelectContent, SelectTrigger, SelectValue, Select, SelectItem }
-    from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import IdBadge from "@/components/IdBadge.cli"
-import { Project } from "@prisma/client"
-import { SelectLabel } from "@radix-ui/react-select"
+import { Client } from "@prisma/client"
 
 const formSchema = z.object({
-  name: z.string().min(1).max(255),
-  description: z.string().max(400),
-  projectId: z.string().min(1).max(3),
+    id: z.string().length(3),
+    name: z.string().min(1).max(255),
+    color: z.string().max(50),
+    clientId: z.string().length(3)
 })
 
-const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Project[]}) => {
+const ProjectForm = ({ allClients, setOpen }: {allClients: Client[], setOpen: any}) => {
     const router = useRouter();
 
     // 1. Define your form.
+    const randomId = Math.random().toString(36).substring(2, 5);
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -42,14 +42,15 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
         //     tennantId         String          // @unique
         //     id                Int             @id @default(autoincrement())
         //     name              String?         @db.VarChar(255)
-        //     description       String?         @db.Text()
-        //     projectId         String
-        //     project           Project         @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+        //     color       String?         @db.Text()
+        //     clientId         String
+        //     project           Project         @relation(fields: [clientId], references: [id], onDelete: Cascade, onUpdate: Cascade)
         //     deliverables      Deliverable[]
         //   }
+        id: randomId,
         name: "",
-        description: "",
-        projectId: "PJD",
+        color: "#555555",
+        clientId: "WDP",
       },
     })
    
@@ -58,15 +59,15 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
         try {
             const d = {
                 tennantId: "user_2cjaSqnQ5RTHCGRC3B567A1uJm0",
-                // id: 0,
+                id: data.id,
                 name: data.name,
-                description: data.description,
-                projectId: data.projectId,
+                color: data.color,
+                clientId: data.clientId,
             };
-            await saveProjectPhaseQuotation(d);
+            await saveProject(d);
             toast({
-                title: `Quotation [${data.name}] saved!`,
-                // description: (
+                title: `Project [${data.name}] saved!`,
+                // color: (
                 //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
                 //     <code className="text-white">{JSON.stringify(d, null, 2)}</code>
                 //     </pre>
@@ -86,12 +87,26 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                         control={form.control}
+                        name="id"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel/>
+                                <FormControl>
+                                    <Input placeholder="3-leter IDxs" {...field} />
+                                </FormControl>
+                                <FormDescription/>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="name"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel/>
                                 <FormControl>
-                                    <Input placeholder="Phase name" {...field} />
+                                    <Input placeholder="Project name" {...field} />
                                 </FormControl>
                                 <FormDescription/>
                                 <FormMessage />
@@ -100,12 +115,12 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                     />
                     <FormField
                         control={form.control}
-                        name="description"
+                        name="color"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel/>
                                 <FormControl>
-                                    <Input placeholder="Description" {...field} />
+                                    <Input placeholder="Color" {...field} />
                                 </FormControl>
                                 <FormDescription/>
                                 <FormMessage />
@@ -114,7 +129,7 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                     />
                     <FormField
                         control={form.control}
-                        name="projectId"
+                        name="clientId"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel/>
@@ -125,13 +140,13 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                                         <SelectValue placeholder="Dog size" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {allProjects
+                                        {allClients
                                             .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
-                                            .map((p, i) =>
-                                            <SelectItem key={i} value={p.id}>
+                                            .map((c, i) =>
+                                            <SelectItem key={i} value={c.id}>
                                                 <div key={i} className="flex flex-row align-middle gap-2">
-                                                    <IdBadge id={p.id}/>
-                                                    <div>{p.name}</div>
+                                                    <IdBadge id={c.id}/>
+                                                    <div>{c.name}</div>
                                                 </div>
                                             </SelectItem>
                                         )}
@@ -151,4 +166,4 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
     )
 }
 
-export default QuotationForm;
+export default ProjectForm;
