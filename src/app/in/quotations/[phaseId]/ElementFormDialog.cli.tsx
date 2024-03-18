@@ -16,13 +16,11 @@ const ElementFormDialog = ({deliverableId}: {deliverableId: number}) => {
       <CRUDActionsMenu actions={
           [
             {
-              icon:
-                <PlusCircle
-                  className="animate-pulse hover:text-destructive"
-                  onClick={() => setOpen(true)}
-                  />,
+              icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
               label: "new Element",
               url: null,
+              onClick: () => setOpen(true),
+              hotKey: "e",
             }
           ]
       }/>

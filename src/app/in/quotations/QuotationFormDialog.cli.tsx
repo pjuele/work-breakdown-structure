@@ -18,13 +18,11 @@ const QuotationFormDialog = ({allProjects}: {allProjects: Project[]}) => {
       <CRUDActionsMenu actions={
         [
           {
-            icon:
-              <PlusCircle
-                className="animate-pulse hover:text-destructive"
-                onClick={() => setOpen(true)}
-                />,
+            icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
             label: "new Phase quotation",
             url: null,
+            onClick: (() => setOpen(true)),
+            hotKey: "+",
           }
         ]
       }/>

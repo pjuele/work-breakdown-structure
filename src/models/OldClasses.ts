@@ -1,91 +1,53 @@
-import { DogSize, isoCurrencyCode } from "@/lib/types";
+import { DogSize, isoCurrencyCode } from "@/types";
 import { getDogSizeToHours } from "@/lib/utils";
+import { Client, Project, ProjectPhase, Element } from "@prisma/client";
 
-export class Task {
-  id: string;
-  description: string;
-  size: DogSize; // TaskSize;
-  constructor(
-    id: string,
-    description: string,
-    size: DogSize // TaskSize
-  ) {
-    this.id = id;
-    this.description = description;
-    this.size = size;
-  }
-}
 export class Deliverable {
   id: number;
   name: string;
-  description: string;
   startDate?: Date;
-  tasks: Task[];
+  elements: Element[];
   phaseId: number;
   constructor(
     id: number,
     name: string,
-    description: string,
     startDate: Date | undefined,
-    tasks: Task[],
+    elements: Element[],
     phaseId: number
   ) {
     this.id = id;
     this.name = name;
-    this.description = description;
     this.startDate = startDate;
-    this.tasks = tasks;
+    this.elements = elements;
     this.phaseId = phaseId;
   }
 
   public hours(): number {
     let totalHours = 0;
-    this.tasks.forEach((task) => {
-      totalHours += getDogSizeToHours(task.size) || 0;
+    this.elements.forEach((element) => {
+      totalHours += getDogSizeToHours(element.size as DogSize) || 0;
     });
     return totalHours;
   }
 }
 
-export class ProjectWBS {
-  phaseId: string;
-  phaseName: string;
-  phaseDescription: string;
-  projectId: string;
-  projectName: string;
-  clientId: string;
-  clientName: string;
-  clientLogoUrl: string;
-  hourlyRate: number;
-  currency: isoCurrencyCode;
-  phase: string;
+export class ProjectPhaseQuotation {
+  phase: ProjectPhase;
+  project: Project;
+  client: Client;
   deliverables: Deliverable[];
   constructor(
-    phaseId: string,
-    phaseName: string,
-    phaseDescription: string,
-    projectId: string,
-    projectName: string,
-    clientId: string,
-    clientName: string,
-    clientLogoUrl: string,
+    phase: ProjectPhase,
+    project: Project,
+    client: Client,
     hourlyRate: number,
-    currency: isoCurrencyCode = "USD",
-    phase: string,
+    currency: isoCurrencyCode,
     deliverables: Deliverable[]
   ) {
-    this.phaseId = phaseId;
-    this.phaseName = phaseName;
-    this.phaseDescription = phaseDescription;
-    this.projectId = projectId;
-    this.projectName = projectName;
-    this.clientId = clientId;
-    this.clientName = clientName;
-    this.clientLogoUrl = clientLogoUrl;
-    this.hourlyRate = hourlyRate;
-    this.currency = currency;
     this.phase = phase;
-    this.deliverables = deliverables;
+    this.project = project;
+    this.client = client;
+    this.deliverables = deliverables ?? ([] as Deliverable[]);
   }
 
   totalHours(): number {

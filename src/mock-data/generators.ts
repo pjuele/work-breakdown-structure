@@ -3,7 +3,7 @@ import {
   MASTER_HOURLY_RATE_CURRENCY_CODE,
   dogSizes,
 } from "@/lib/constants";
-import { DogSize } from "@/lib/types";
+import { DogSize } from "@/types";
 import { pad } from "@/lib/utils";
 import { Deliverable, Task, ProjectWBS } from "@/models/OldClasses";
 

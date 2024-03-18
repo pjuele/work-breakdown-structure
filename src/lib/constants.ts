@@ -1,4 +1,4 @@
-import { DogSize, isoCurrencyCode } from "./types";
+import { DogSize, isoCurrencyCode } from "../types";
 
 // Path placeholders:
 export const PATH_TO_QUOTATIONS = "/in/quotations";

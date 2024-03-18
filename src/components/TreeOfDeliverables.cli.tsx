@@ -2,20 +2,21 @@
 
 import { dogSizeLegends } from "@/lib/constants";
 import { getDogSizeToHours, getDogSizeCostAsString, cn, formatCurrencyNumber } from "@/lib/utils";
-import { Deliverable } from "@/models/OldClasses";
-import { Package, PlusCircle } from "lucide-react";
+import { Package } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { isoCurrencyCode } from "@/lib/types";
+import { DogSize, isoCurrencyCode } from "@/types";
 import { ScrollArea } from "./ui/scroll-area";
 import { ScrollBar } from "./ui/scroll-area";
 import { TooltipProvider } from "./ui/tooltip";
 import IdBadge from "./IdBadge.cli";
 import ElementFormDialog from "@/app/in/quotations/[phaseId]/ElementFormDialog.cli";
 import { useEffect, useState } from "react";
+import { Element } from "@prisma/client";
+import DeliverableTree from "@/types/DeliverableTree.type";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
-    { deliverables: Deliverable[], hourlyRate: number, currency: isoCurrencyCode }
+    { deliverables: DeliverableTree[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
     const [finishedRendering, setFinishedRendering] = useState(false);
 
@@ -42,7 +43,7 @@ function TheActualTree(
 ) {
     return (
         <div className="flex flex-row align-top justify-center gap-3">
-            {deliverables.map((deliverable: Deliverable, index: number) => {
+            {deliverables.map((deliverable: DeliverableTree, index: number) => {
                 return (
                     <div key={index} className={cn(
                             "flex flex-col gap-3",
@@ -59,9 +60,9 @@ function TheActualTree(
                         <ElementFormDialog deliverableId={deliverable.id}/>
             
                         <div className='flex flex-col gap-3'>
-                            {deliverable.tasks.map((task: any, index: number) => (
+                            {deliverable.elements.map((element: any, index: number) => (
                                 <TaskCard key={index}
-                                    task={task}
+                                    element={element}
                                     hourlyRate={hourlyRate}
                                     currency={currency}/>
                             ))}
@@ -120,9 +121,9 @@ function DeliverableCard(
 }
 
 function TaskCard(
-    {task, hourlyRate, currency}:
+    {element, hourlyRate, currency}:
     {
-        task: Deliverable["tasks"][number],
+        element: Element,
         hourlyRate: number,
         currency: isoCurrencyCode
     }
@@ -130,14 +131,14 @@ function TaskCard(
     return(
         <Card className="bg-secondary max-w-full min-w-full">
             <CardHeader className="flex flex-row gap-2 align-middle">
-                {/* <div className="my-auto"><DogPic dogSize={task.size} /></div> */}
-                <CardTitle className="text-wrap my-auto">{task.description}</CardTitle>
+                {/* <div className="my-auto"><DogPic dogSize={element.size} /></div> */}
+                <CardTitle className="text-wrap my-auto">{element.name}</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className='flex flex-row flex-wrap gap-1'>
-                    <IdBadge id={dogSizeLegends.get(task.size) + ""}/>
-                    <IdBadge id={getDogSizeToHours(task.size) + " hs"}/>
-                    <IdBadge id={getDogSizeCostAsString(task.size, hourlyRate, currency) + " "}/>
+                    <IdBadge id={dogSizeLegends.get(element.size as DogSize) + ""}/>
+                    <IdBadge id={getDogSizeToHours(element.size as DogSize) + " hs"}/>
+                    <IdBadge id={getDogSizeCostAsString(element.size as DogSize, hourlyRate, currency) + " "}/>
                 </div>
             </CardContent>
         </Card>

@@ -24,6 +24,7 @@ import { SelectContent, SelectTrigger, SelectValue, Select, SelectItem }
 import IdBadge from "@/components/IdBadge.cli"
 import { Project } from "@prisma/client"
 import { SelectLabel } from "@radix-ui/react-select"
+import { DollarSign } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -80,7 +81,8 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
     }
      
     return (
-        <div className="max-w-max bg-slate-950 p-10 m-auto">
+        <div className="max-w-max bg-slate-950 p-0 m-auto">
+            <h2><DollarSign className="inline mr-2"/> New Project-phase Quotation</h2>
             <Separator/><br/>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

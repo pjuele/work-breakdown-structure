@@ -1,65 +1,52 @@
 import { fxRates } from "@/lib/constants";
-import { formatCurrencyNumber, fxConvertAmount } from "@/lib/utils";
+import { formatCurrencyNumber, fxConvertAmount, getDogSizeToHours } from "@/lib/utils";
 import { Badge } from "./ui/badge";
 import { Card, CardHeader, CardContent } from "./ui/card";
-import { isoCurrencyCode } from "@/lib/types";
-import ProjectClientLabels from "./ProjectClientLabels.cli";
+import { DogSize, isoCurrencyCode } from "@/types";
+import ProjectClientBadge from "./ProjectClientBadge.cli";
 import IdBadge from "./IdBadge.cli";
-import { Separator } from "@radix-ui/react-menubar";
+import { Client, Project, ProjectPhase } from "@prisma/client";
+import DeliverableTree from "@/types/DeliverableTree.type";
+import { Separator } from "./ui/separator";
+import AppTitle from "./AppTitle.cli";
+
+function deliverableTotalHours(d: DeliverableTree): number {
+    let totalHours = 0;
+    d.elements.forEach((element) => {
+      totalHours += getDogSizeToHours(element.size as DogSize) || 0;
+    });
+    return totalHours;
+  }
 
 export default function WBSRoot(
+    { client, project, phase, deliverables, hourlyRate, currency }:
     {
-        clientLogoUrl,
-        clientId,
-        clientName,
-        projectId,
-        projectName,
-        phaseId,
-        phaseName,
-        phaseDescription,
-        totalHours,
-        hourlyRate,
-        currency,
-    }:
-    {
-        clientLogoUrl: string,
-        clientId: string,
-        clientName: string,
-        projectId: string,
-        projectName: string,
-        phaseId: string,
-        phaseName: string,
-        phaseDescription: string,
-        totalHours: number,
+        client: Client,
+        project: Project,
+        phase: ProjectPhase,
+        deliverables: DeliverableTree[],
         hourlyRate: number,
         currency: isoCurrencyCode
     }
 ) {
+    const { logoUrl: clientLogoUrl, id: clientId, name: clientName } = client;
+    const { id: projectId, name: projectName } = project;
+    const { id: phaseId, name: phaseName, description: phaseDescription } = phase;
+    let totalHours = 0;
+    deliverables.forEach((deliverable) => {
+        totalHours += deliverableTotalHours(deliverable);
+    });
     return (
         <Card className="mx-auto bg-muted w-full md:w-auto">
             <CardHeader>
-                <div className="flex flex-row gap-3 align-top w-full flex-wrap">
-                    {/* <CardDescription className="w-full md:w-auto"> */}
-                        <ProjectClientLabels
-                            phase={{
-                                project: {
-                                    id: projectId,
-                                    name: projectName,
-                                    client: {
-                                        id: clientId,
-                                        name: clientName,
-                                        logoUrl: clientLogoUrl
-                                    }
-                                },
-                                id: phaseId,
-                                name: phaseName
-                            }}
-                            includePhase={true}
-                        />
-                        <Separator className="w-full" />
-                        <p className="prose"><small>{phaseDescription}</small></p>
-                        <Separator className="w-full" />
-                    {/* </CardDescription> */}
+                <div className="flex flex-col gap-3 align-top w-full flex-wrap">
+                    <AppTitle size="2xl" title={phaseName ?? ""}/>
+                    <Separator className="w-full" />
+                    <ProjectClientBadge
+                        project={project}
+                        client={client}
+                    />
+                    <div className="prose overflow-clip">{phaseDescription}</div>
                 </div>
             </CardHeader>
 

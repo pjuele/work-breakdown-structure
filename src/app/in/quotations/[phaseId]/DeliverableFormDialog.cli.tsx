@@ -22,13 +22,11 @@ const DeliverableFormDialog = ({phaseId}: {phaseId: number}) => {
               url: PATH_TO_QUOTATIONS,
             },
             {
-              icon:
-                <PlusCircle
-                  className="animate-pulse hover:text-destructive"
-                  onClick={() => setOpen(true)}
-                  />,
+              icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
               label: "new Deliverable",
               url: null,
+              onClick: () => setOpen(true),
+              hotKey: "d",
             }
           ]
       }/>

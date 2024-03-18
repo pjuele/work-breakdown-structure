@@ -23,7 +23,7 @@ import { Package } from "lucide-react"
 import { dogSizes } from "@/lib/constants"
 import { Badge } from "@/components/ui/badge"
 import DogPic from "@/components/DogPic.cli"
-import { DogSize } from "@/lib/types"
+import { DogSize } from "@/types"
 import {
     Select,
     SelectContent,

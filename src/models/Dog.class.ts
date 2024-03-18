@@ -1,5 +1,5 @@
 import { dogImageSizes, dogSizeImageUrls } from "@/lib/constants";
-import { DogSize } from "@/lib/types";
+import { DogSize } from "@/types";
 
 export default class Dog {
   static imageUrl(size: DogSize): string {

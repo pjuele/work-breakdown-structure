@@ -1,7 +1,8 @@
 import AppTitle from '@/components/AppTitle.cli';
 import prisma from '../../../lib/prisma';
-import PhaseCard from './PhaseCard.cli';
-import QuotationFormDialog from './QutationFormDialog.cli';
+import PhaseTitleBlock from './PhaseTitleBlock.cli';
+import QuotationFormDialog from './QuotationFormDialog.cli';
+import Link from 'next/link';
 
 async function getData() {
     const phases = await prisma.projectPhase.findMany({
@@ -25,7 +26,18 @@ export default async function Home() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {phases.map((phase, index) => (
-            <PhaseCard key={index} phase={phase}/>
+          <Link key={index} href={`quotations/${phase.id}`}>
+            <div className={
+              "p-5 border-2 rounded-md h-full " +
+              "hover:cursor-pointer hover:bg-secondary hover:border-2 hover:border-none"
+            }>
+              <PhaseTitleBlock
+                phase={phase}
+                client={phase.project.client}
+                project={phase.project}
+              />
+            </div>
+          </Link>
         ))}
       </div>
 

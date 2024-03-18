@@ -1,7 +1,7 @@
 import Dog from "@/models/Dog.class";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
-import { DogSize } from "@/lib/types";
+import { DogSize } from "@/types";
 
 export default function DogPic({dogSize}: {dogSize: DogSize | undefined}) {
     if (!dogSize) { // || !dogs.has(dogSize)) {

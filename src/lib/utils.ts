@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { dogSizeHours, fxFlags, fxRates } from "./constants";
-import { DogSize, isoCurrencyCode } from "./types";
+import { DogSize, isoCurrencyCode } from "../types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

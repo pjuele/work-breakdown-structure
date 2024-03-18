@@ -36,6 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 prisma/seed-data.js
+prisma/seed-data.real.js
 prisma/.env
 
 **/trash/*

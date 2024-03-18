@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "workbuster",
   description: "Easy WBS tool for your agile projects.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicons/icon.svg",
   },
 };
 
