@@ -10,8 +10,11 @@ import {
 import QuotationForm from './QuotationForm.cli';
 import { useState } from 'react';
 import { Project } from '@prisma/client';
+import { cn } from '@/lib/utils';
 
-const QuotationFormDialog = ({allProjects}: {allProjects: Project[]}) => {
+const QuotationFormDialog = (
+  {allProjects, toolbarClassName}:
+  {allProjects: Project[], toolbarClassName?: string | undefined}) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -25,9 +28,14 @@ const QuotationFormDialog = ({allProjects}: {allProjects: Project[]}) => {
             hotKey: "+",
           }
         ]
-      }/>
+      } toolbarClassName={toolbarClassName}/>
       <Dialog open={open} onOpenChange={setOpen} modal>
-        <DialogContent>
+        <DialogContent className={
+          cn(
+            "p-0 md:p-5",
+            "w-full h-full max-w-screen max-h-screen",
+            "md:w-auto md:h-auto md:max-w-auto md:max-h-auto",
+          )}>
               <QuotationForm setOpen={setOpen} allProjects={allProjects}/>
         </DialogContent>
       </Dialog>

@@ -81,9 +81,13 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
     }
      
     return (
-        <div className="max-w-max bg-slate-950 p-0 m-auto">
-            <h2><DollarSign className="inline mr-2"/> New Project-phase Quotation</h2>
-            <Separator/><br/>
+        <div className="max-w-max bg-slate-950 p-0 m-auto md:m-5 lg:m-10">
+            <h2>
+                <div className="flex flex-row gap-2 mb-5 md:mb-10">
+                    <DollarSign className="inline border-2 rounded-md p-1"/>
+                    <div>New Project-phase Quotation</div>
+                </div>
+            </h2>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField

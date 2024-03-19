@@ -10,28 +10,38 @@ import Image from "next/image";
 export default function Hero() {
     const router = useRouter();
     return (
-        <div className="p-10 pt-[10vh] w-full h-screen flex flex-col align-bottom gap-5">
-            <div className={
-                    cn(
-                        "mb-10 md:mb-0 mx-auto",
-                        "w-[70vw] max-w-[350px] h-[50vmin] max-h-[170px]",
-                        "sm:w-[350px] sm:max-w-max sm:h-[200px] sm:max-h-max",
-                        "md:w-[450px] md:h-[350px]",
-                        "lg:w-[500px] lg:h-[400px]",
-                        "xl:w-[600px] xl:h-[500px]"
-                    )}>
+        <div className="p-10 pt-[10vh] w-full h-screen flex flex-col align-middle justify-top gap-5 landscape:gap-2">
 
-            <Image className="mx-auto max-w-auto max-h-[35vh]"
-                priority
-                src="/Buster.svg"
-                width={400} height={303}
-                alt="Buster the Amazing Border Collie" />
-            <Image className="mx-auto p-2 my-5"
-                priority
-                src="/workbuster.svg"
-                width={400} height={100}
-                alt="workbuster"
-                />
+            <div className={cn(
+                "relative",
+                // "border-2",
+                "w-full h-auto min-h-[130px] max-w-[50vw] landscape:max-w-[25vw] mx-auto",
+                // "landscape:w-auto landscape:h-full",
+                // "portrait:w-full portrait:h-auto",
+                "aspect-[5/4]"
+            )}>
+                <Image
+                    priority
+                    src="/Buster.svg"
+                    alt="Buster, the better amongst us."
+                    fill={true}
+                    />
+            </div>
+            <div className={cn(
+                "relative",
+                // "border-2",
+                "mx-auto",
+                "w-full h-auto min-h-[30px] max-h-[10vh] landscape:max-h-[7vh] max-w-[70vw]",
+                // "landscape:w-auto landscape:h-full",
+                // "portrait:w-full portrait:h-auto",
+                "aspect-[5/1]"
+            )}>
+                <Image 
+                    priority
+                    src="/workbuster.svg"
+                    alt="workbuster"
+                    fill={true}
+                    />
             </div>
 
             {/* <div className="mx-auto flex flex-row gap-2">
@@ -46,7 +56,7 @@ export default function Hero() {
                 onClick={() => router.push(PATH_TO_QUOTATIONS)}
                 variant={"outline"}
                 className={
-                    "mx-auto max-w-max " +
+                    "mx-auto max-w-max mt-5 " +
                     "hover:bg-destructive hover:animate-pulse hover:border-0 "
                     }>
                 <span className="p-5 md:text-md xl:text-lg">start!</span>

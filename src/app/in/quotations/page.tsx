@@ -20,10 +20,11 @@ export default async function Home() {
     const { phases, projects } = await getData();
   return (
     <section className="p-3 flex flex-col gap-5 wrap">
-      <div className="flex flex-row gap-5 align-top justify-center mx-auto">
-        <AppTitle size="lg" title="Project-phase Quotations" />
-        <QuotationFormDialog allProjects={projects}/>
-      </div>
+      {/* <div className="flex landscape:flex-row portrait:flex-col gap-1 align-middle justify-evenly mx-auto"> */}
+        <AppTitle size="xl" title="Project-phase Quotations"
+          className="mx-auto" />
+        <QuotationFormDialog allProjects={projects} toolbarClassName=""/>
+      {/* </div> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {phases.map((phase, index) => (
           <Link key={index} href={`quotations/${phase.id}`}>

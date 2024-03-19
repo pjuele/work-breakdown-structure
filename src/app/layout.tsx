@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className={cn(
           // "lg:container",
-          "mx-auto min-h-screen font-sans antialiased",
+          "mx-[3vw] min-h-screen font-sans antialiased",
           fontSans.variable,
           fontMono.variable
         )}
@@ -47,7 +47,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          {/* <DebugBreakpoints/> */}
+          <DebugBreakpoints/>
           <Toaster />
         </ThemeProvider>
       </body>

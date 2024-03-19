@@ -17,6 +17,7 @@ import { ModeToggle } from "./mode-toggle.cli";
 import { useEffect } from "react";
 import { toast } from "./ui/use-toast";
 import KeyCap from "./KeyCap.cli";
+import { cn } from "@/lib/utils";
 
 const ACTION_FOR_QUOTATIONS = 0;
 const ACTION_FOR_PROJECTS = 1;
@@ -69,15 +70,23 @@ export default function AppMenu() {
 
     // const router = useRouter()
         return (
-        <div className="flex flex-row justify-center lg:justify-between gap-3 p-5 m-auto">
+        <div className="flex flex-row align-middle justify-between m-3 gap-3">
             <div className="cursor-pointer my-auto" onClick={() => (router.push("/"))}><AppLogo /></div>
-            <Menubar className="bg-muted ml-3 my-auto">
+            <Menubar className={
+                cn(
+                    "p-1",
+                    "flex flex-col md:flex-row align-middle justify-center gap-0"
+                )}>
                 <MenubarMenu>
-                    <ModeToggle/>
-                    <MenubarTrigger className="cursor-pointer hover:bg-destructive hover:animate-pulse hover:border-0">
+                    <ModeToggle className="hidden md:inline-flex"/>
+                    <MenubarTrigger className="m-auto cursor-pointer hover:animate-pulse hover:border-0">
                         <AlignJustify className="w-5 h-5"/>
                     </MenubarTrigger>
                     <MenubarContent className="mr-5">
+                        <MenubarItem>
+                            <ModeToggle className="inline-flex md:hidden"/>
+                        </MenubarItem>
+                        <MenubarSeparator className="inline-flex md:hidden" />
                         <MenubarItem onClick={actions[ACTION_FOR_QUOTATIONS]}>
                             Quotations <MenubarShortcut><KeyCap keys={["Ctrl", "q"]} /></MenubarShortcut>
                         </MenubarItem>

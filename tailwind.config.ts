@@ -19,6 +19,20 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        // 'tall': {
+        //   'raw': `only screen and (max-height: 960px) and (max-width: 480px)`
+        // },
+        // 'wide': {
+        //   'raw': `only screen and (max-height: 480px) and (max-width: 960px)`
+        // },
+        'portrait': {
+          'raw': '(orientation: portrait)'
+        },
+        'landscape': {
+          'raw': '(orientation: landscape)'
+        }
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         mono: ["var(--font-mono)", ...fontFamily.mono],

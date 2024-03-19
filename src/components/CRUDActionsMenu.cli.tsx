@@ -13,17 +13,20 @@ import { useEffect, useState } from "react";
 import { toast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import KeyCap from "./KeyCap.cli";
+import { cn } from "@/lib/utils";
 
 export default function CRUDActionsMenu(
-    {actions}:
-    {actions: {
-        icon: JSX.Element,
-        label: string,
-        url: string | null,
-        onClick?: () => void,
-        // setOpen?: (open: boolean) => void,
-        hotKey?: string,
-    }[],
+    {actions, toolbarClassName}:
+    {
+        actions: {
+            icon: JSX.Element,
+            label: string,
+            url: string | null,
+            onClick?: () => void,
+            // setOpen?: (open: boolean) => void,
+            hotKey?: string,
+        }[],
+        toolbarClassName?: string | undefined
     }
 ) {
     const [showHotkeys, setShowHotkeys] = useState(false);
@@ -73,13 +76,20 @@ export default function CRUDActionsMenu(
       }, [hotKeys, showHotkeys, actions, router]);
 
     return (
-        <div className="max-w-max mx-auto">
+        <div className={
+            cn(
+                "max-w-max",
+                "mx-auto landscape:mx-[-0.5rem]", // FIXME: figure out who's adding a margin in shadcn and remove this hack
+                "m-y-auto",
+                // "bg-secondary",
+                toolbarClassName,
+            )}>
             <TooltipProvider>
                 <NavigationMenu>
                     <NavigationMenuList>
                     {actions.map((action, index) => {
                         const itemContent = (
-                            <div className="flex flex-row align-middle gap-2 m-2">
+                            <div className="flex flex-row align-middle gap-2">
                                 {action.icon}
                                 <div className="text-sm min-w-max">{action.label}</div>
                                 {showHotkeys && hotKeys[index] && <KeyCap keys={[hotKeys[index] ?? "?"]}/>}
