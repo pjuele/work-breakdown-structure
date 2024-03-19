@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const WDPJ_CLERK_ID = "user_2cjaSqnQ5RTHCGRC3B567A1uJm0";
-import { data } from "./seed-data";
+import { data } from "./seed-data.sample";
 
 const prisma = new PrismaClient();
 async function main() {
