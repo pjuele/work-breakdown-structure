@@ -26,6 +26,8 @@ import { saveDeliverable } from "./server-actions"
 // import { redirect, useRouter } from 'next/navigation'
 import { useRouter } from "next/navigation"
 import { DatePicker } from "@/components/DatePicker.cli"
+import DeliverableKeyCap from "@/components/DeliverableKeyCap.cli"
+import AppTitle from "@/components/AppTitle.cli"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -74,9 +76,13 @@ export default function DeliverableForm({ phaseId, setOpen }: {phaseId: number, 
     }
      
     return (
-        <div className="max-w-max bg-slate-950 p-10 m-auto">
-            <h2><Package className="inline mr-2"/> New Deliverable</h2>
-            <Separator/><br/>
+        <div className="max-w-max bg-slate-950 p-0 m-auto md:m-5 lg:m-10">
+            
+            <div className="flex flex-row align-middle justify-center gap-2 mb-10 md:mb-10">
+                <DeliverableKeyCap />
+                <AppTitle size="xl" title="New Deliverable" />
+            </div>
+            
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField

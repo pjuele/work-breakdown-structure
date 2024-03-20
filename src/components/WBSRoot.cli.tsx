@@ -40,13 +40,13 @@ export default function WBSRoot(
         <Card className="mx-auto bg-muted w-full md:w-auto">
             <CardHeader>
                 <div className="flex flex-col gap-3 align-top w-full flex-wrap">
-                    <AppTitle size="2xl" title={phaseName ?? ""}/>
+                    <AppTitle size="2xl" title={phaseName ?? ""} className="ml-0"/>
+                    <div className="prose overflow-clip max-w-auto landscape:max-w-[60vw] mx-auto landscape:mx-3">{phaseDescription}</div>
                     <Separator className="w-full" />
                     <ProjectClientBadge
                         project={project}
                         client={client}
                     />
-                    <div className="prose overflow-clip">{phaseDescription}</div>
                 </div>
             </CardHeader>
 

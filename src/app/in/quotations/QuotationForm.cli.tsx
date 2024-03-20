@@ -16,15 +16,15 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import { Separator } from "@/components/ui/separator"
 import { saveProjectPhaseQuotation } from "./server-actions"
 import { useRouter } from "next/navigation"
 import { SelectContent, SelectTrigger, SelectValue, Select, SelectItem }
     from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import IdBadge from "@/components/IdBadge.cli"
 import { Project } from "@prisma/client"
-import { SelectLabel } from "@radix-ui/react-select"
-import { DollarSign } from "lucide-react"
+import QuotationKeyCap from "@/components/QuotationKeyCap.cli"
+import AppTitle from "@/components/AppTitle.cli"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -82,12 +82,12 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
      
     return (
         <div className="max-w-max bg-slate-950 p-0 m-auto md:m-5 lg:m-10">
-            <h2>
-                <div className="flex flex-row gap-2 mb-5 md:mb-10">
-                    <DollarSign className="inline border-2 rounded-md p-1"/>
-                    <div>New Project-phase Quotation</div>
-                </div>
-            </h2>
+            
+            <div className="flex flex-row align-middle justify-center gap-2 mb-10 md:mb-10">
+                <QuotationKeyCap />
+                <AppTitle size="xl" title="New Quotation" />
+            </div>
+            
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
@@ -111,7 +111,7 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                             <FormItem>
                                 <FormLabel/>
                                 <FormControl>
-                                    <Input placeholder="Description" {...field} />
+                                    <Textarea placeholder="Description" {...field} />
                                 </FormControl>
                                 <FormDescription/>
                                 <FormMessage />
@@ -123,12 +123,12 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
                         name="projectId"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel/>
+                                <FormLabel>Project</FormLabel>
                                 <FormControl>
                                 <div className="flex flex-col gap-2">
                                     <Select value={field.value} onValueChange={field.onChange}>
                                     <SelectTrigger className="w-[180px]">
-                                        <SelectValue placeholder="Dog size" />
+                                        <SelectValue placeholder="Parent Project" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         {allProjects

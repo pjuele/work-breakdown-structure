@@ -42,7 +42,7 @@ function TheActualTree(
     { deliverables: any[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
     return (
-        <div className="flex flex-row align-top justify-center gap-3">
+        <div className="flex flex-row align-top justify-flex-start gap-3">
             {deliverables.map((deliverable: DeliverableTree, index: number) => {
                 return (
                     <div key={index} className={cn(

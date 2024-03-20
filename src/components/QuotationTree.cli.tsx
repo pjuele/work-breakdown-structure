@@ -44,8 +44,8 @@ export default function QuotationTree(
     //   }, []);
 
     return (
-        <div className="flex flex-col gap-10 w-full">
-            <div className="flex flex-row gap-3 align-top justify-center">
+        <div className="flex flex-col align-top gap-10 w-full bg-blue-950">
+            {/* <div className="flex flex-row gap-3 align-top justify-start bg-cyan-800"> */}
                 {/* <Badge variant="outline">{key}</Badge> */}
                 <WBSRoot
                   client={client}
@@ -55,7 +55,7 @@ export default function QuotationTree(
                   hourlyRate={hourlyRate}
                   currency={currency}
                 />
-            </div>
+            {/* </div> */}
 
             <TreeOfDeliverables
                 deliverables={deliverables}

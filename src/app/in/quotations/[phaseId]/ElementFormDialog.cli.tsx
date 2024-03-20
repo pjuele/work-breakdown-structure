@@ -8,6 +8,7 @@ import {
 import ElementForm from './ElementForm.cli';
 import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const ElementFormDialog = ({deliverableId}: {deliverableId: number}) => {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,7 @@ const ElementFormDialog = ({deliverableId}: {deliverableId: number}) => {
       <CRUDActionsMenu actions={
           [
             {
-              icon: <PlusCircle className="animate-pulse hover:text-destructive"/>,
+              icon: <PlusCircle className="hover:animate-pulse"/>,
               label: "new Element",
               url: null,
               onClick: () => setOpen(true),
@@ -25,7 +26,12 @@ const ElementFormDialog = ({deliverableId}: {deliverableId: number}) => {
           ]
       }/>
       <Dialog open={open} onOpenChange={setOpen} modal>
-        <DialogContent>
+        <DialogContent className={
+          cn(
+            "p-0 md:p-5",
+            "w-full h-full max-w-screen max-h-screen",
+            "md:w-auto md:h-auto md:max-w-auto md:max-h-auto",
+          )}>
               <ElementForm deliverableId={deliverableId} setOpen={setOpen}/>
         </DialogContent>
       </Dialog>
