@@ -12,7 +12,7 @@ const AppTitle = ({ size, title, className }:
         <div className={
             cn(
                 `text-${size} font-bold`,
-                "mx-auto landscape:mx-3",
+                "mx-auto landscape:mx-0",
                 className,
             )}>
             {title}

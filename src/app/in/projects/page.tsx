@@ -1,4 +1,4 @@
-import AppTitle from '@/components/AppTitle.cli';
+import AppTitle from '@/components/boilerplate/AppTitle.cli';
 import prisma from '../../../lib/prisma';
 import ProjectFormDialog from './ProjectFormDialog.cli';
 import ProjectList from './ProjectList.cli';

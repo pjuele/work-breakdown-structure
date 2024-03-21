@@ -1,39 +1,31 @@
 'use client';
 
-import AppTitle from "@/components/AppTitle.cli";
+import AppTitle from "@/components/boilerplate/AppTitle.cli";
 import ProjectClientBadge from "@/components/ProjectClientBadge.cli";
 import { Client, Project, ProjectPhase } from "@prisma/client";
+import Image from "next/image";
+import PhaseDropDownMenu from "./PhaseDropDownMenu.cli";
 
 export default function PhaseTitleBlock(
     { phase, client, project }:
     { phase: ProjectPhase, client: Client, project: Project }) {
     return (
-        <div
-            key={phase.id}
-            className={"w-full md:w-auto flex flex-col gap-2"}>
-            <AppTitle size={"lg"} title={phase.name ?? "?"} />
-            <div className="overflow-x-scroll min-w-max">
+        <>
+            <PhaseDropDownMenu phaseId={phase.id} />
+        <div key={phase.id} className="flex flex-row gap-5">
+            <div className="relative min-w-24 min-h-24 max-w-24 max-h-24 bg-muted rounded-md">
+                <Image
+                    src={client.logoUrl}
+                    alt={client.name ?? "client logo"}
+                    fill={true}
+                    className="rounded-md aspect-square object-scale-down"
+                />
+            </div>
+            <div className="flex flex-col gap-3 overflow-hidden">
+                <AppTitle size={"md"} title={phase.name ?? "?"} className="mx-0"/>
                 <ProjectClientBadge project={project} client={client} />
             </div>
         </div>
+        </>
     );
 }
-// export default function PhaseCard({ phase }: { phase: any }) {
-//     const router = useRouter();
-//     return (
-//         <Card
-//             onClick={(e) => {router.push(`${PATH_TO_QUOTATIONS}/${phase.id}`)}}
-//             key={phase.id}
-//             className={
-//                 "w-full md:w-auto " +
-//                 "hover:cursor-pointer hover:bg-secondary hover:border-2 hover:border-destructive"
-//                 }>
-//             <CardHeader>
-//                 <CardTitle>{phase.name}</CardTitle>
-//             </CardHeader>
-//             <CardContent>
-//                 <ProjectClientBadge project={phase.project} client={phase.project.client} />
-//             </CardContent>
-//         </Card>
-//     );
-// }

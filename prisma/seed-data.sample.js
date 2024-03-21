@@ -4,13 +4,13 @@ const WDPJ_CLERK_ID = "user_2cjaSqnQ5RTHCGRC3B567A1uJm0";
 export const data = [];
 
 data[0] =
-  // RIT data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // VLY data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   {
     tennantId: WDPJ_CLERK_ID,
     id: "VLY",
     name: "Vandelay Industries",
     color: "purple",
-    logoUrl: "/RIT.cli.logo.png",
+    logoUrl: "/VLY.logo.webp",
     projects: {
       create: [
         {
@@ -22,7 +22,7 @@ data[0] =
             create: [
               {
                 tennantId: WDPJ_CLERK_ID,
-                name: "PH1 | Landing Page",
+                name: "One : Vandelay Landing Page",
               },
             ],
           },
@@ -32,25 +32,25 @@ data[0] =
   };
 
 data[1] =
-  // WDP data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // ACM data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   {
     tennantId: WDPJ_CLERK_ID,
     id: "ACM",
     name: "ACME Corp.",
     color: "darkred",
-    logoUrl: "/WDPJ.logo.jpg",
+    logoUrl: "/ACM.logo.webp",
     projects: {
       create: [
         {
           tennantId: WDPJ_CLERK_ID,
           id: "RKS",
-          name: "Rocket-powered Skates",
+          name: "Rocket-powered Skates Launch",
           color: "lightgreen",
           phases: {
             create: [
               {
                 tennantId: WDPJ_CLERK_ID,
-                name: "PH1 | Cunning Plan",
+                name: "One : Draft a cunning plan",
                 description:
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus asperiores impedit recusandae non? Cum, quidem eius eligendi soluta nesciunt numquam consequuntur quam dicta, incidunt adipisci rerum earum pariatur nulla natus.",
                 deliverables: {
@@ -114,13 +114,46 @@ data[1] =
   };
 
 data[2] =
-  // REN data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // LPH data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   {
     tennantId: WDPJ_CLERK_ID,
     id: "LPH",
     name: "Los Pollos Hermanos",
-    color: "yelloy",
-    logoUrl: "/REN.logo.webp",
+    color: "yellow",
+    logoUrl: "/LPH.logo.png",
+  };
+
+data[3] =
+  // RIT data tree - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  {
+    tennantId: WDPJ_CLERK_ID,
+    id: "RIT",
+    name: "Responsive IT",
+    color: "navy",
+    logoUrl: "/RIT.cli.logo.png",
+    projects: {
+      create: [
+        {
+          tennantId: WDPJ_CLERK_ID,
+          id: "EFF",
+          name: "Ethhar Firebase Functions Backend",
+          color: "blue",
+          phases: {
+            create: [
+              {
+                tennantId: WDPJ_CLERK_ID,
+                name: "Six : Add third location",
+                description:
+                  'Esta fase involucra literalmente el agregar una tercer ciudad ("location") al sistema luego de haber ya establecido MVD y CABA. Ademas, esta estimacion sera utilizada como estimacion generica para pasarle a Daniel como costo de agregar nuevaas ciudades/locations de ahi en mas (con una cota maxima porque llega un volument en el que habria que revisar la arquitectura en Firestore, digamos mas de 10 ciudades).',
+                deliverables: {
+                  create: [],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
   };
 
 function randomDate() {

@@ -1,14 +1,14 @@
 import { fxRates } from "@/lib/constants";
 import { formatCurrencyNumber, fxConvertAmount, getDogSizeToHours } from "@/lib/utils";
-import { Badge } from "./ui/badge";
-import { Card, CardHeader, CardContent } from "./ui/card";
+import { Badge } from "../../../../components/ui/badge";
+import { Card, CardHeader, CardContent } from "../../../../components/ui/card";
 import { DogSize, isoCurrencyCode } from "@/types";
-import ProjectClientBadge from "./ProjectClientBadge.cli";
-import IdBadge from "./IdBadge.cli";
+import ProjectClientBadge from "../../../../components/ProjectClientBadge.cli";
+import IdBadge from "../../../../components/IdBadge.cli";
 import { Client, Project, ProjectPhase } from "@prisma/client";
 import DeliverableTree from "@/types/DeliverableTree.type";
-import { Separator } from "./ui/separator";
-import AppTitle from "./AppTitle.cli";
+import { Separator } from "../../../../components/ui/separator";
+import AppTitle from "../../../../components/boilerplate/AppTitle.cli";
 
 function deliverableTotalHours(d: DeliverableTree): number {
     let totalHours = 0;

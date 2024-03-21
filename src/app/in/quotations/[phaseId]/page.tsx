@@ -1,7 +1,6 @@
 import prisma from '../../../../lib/prisma';
-import { Deliverable, ProjectPhaseQuotation } from '@/models/OldClasses';
 import { MASTER_HOURLY_RATE, MASTER_HOURLY_RATE_CURRENCY_CODE } from '@/lib/constants';
-import QuotationTree from '@/components/QuotationTree.cli';
+import QuotationTree from '@/app/in/quotations/[phaseId]/QuotationTree.cli';
 import DeliverableFormDialog from './DeliverableFormDialog.cli';
 import { Client, Project, ProjectPhase } from '@prisma/client';
 

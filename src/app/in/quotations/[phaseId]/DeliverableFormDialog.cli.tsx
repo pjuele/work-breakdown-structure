@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog"
 import DeliverableForm from './DeliverableForm.cli';
 import { useState } from 'react';
-import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
+import CRUDActionsMenu from '@/components/boilerplate/CRUDActionsMenu.cli';
 import { PATH_TO_QUOTATIONS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 

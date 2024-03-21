@@ -10,9 +10,9 @@ import {
 import { ArrowLeftCircle, PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "./ui/use-toast";
-import { Button } from "./ui/button";
-import KeyCap from "./KeyCap.cli";
+import { toast } from "../ui/use-toast";
+import { Button } from "../ui/button";
+import KeyCap from "../KeyCap.cli";
 import { cn } from "@/lib/utils";
 
 export default function CRUDActionsMenu(

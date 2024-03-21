@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Noto_Sans as FontSans } from "next/font/google";
 import { Victor_Mono as FontMono } from "next/font/google";
-import { ThemeProvider } from '@/components/theme-provider.cli'
+import { ThemeProvider } from '@/components/boilerplate/theme-provider.cli'
 import "./globals.css";
 import { cn } from "../lib/utils";
-import DebugBreakpoints from "@/components/DebugBreakpoints.cli";
+import DebugBreakpoints from "@/components/boilerplate/DebugBreakpoints.cli";
 import { Toaster } from "@/components/ui/toaster"
 
 export const fontSans = FontSans({

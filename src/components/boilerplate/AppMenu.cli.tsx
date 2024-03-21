@@ -15,8 +15,8 @@ import { useRouter } from 'next/navigation'
 import { PATH_TO_CLIENTS, PATH_TO_PROJECTS, PATH_TO_QUOTATIONS } from "@/lib/constants";
 import { ModeToggle } from "./mode-toggle.cli";
 import { useEffect } from "react";
-import { toast } from "./ui/use-toast";
-import KeyCap from "./KeyCap.cli";
+import { toast } from "../ui/use-toast";
+import KeyCap from "../KeyCap.cli";
 import { cn } from "@/lib/utils";
 
 const ACTION_FOR_QUOTATIONS = 0;

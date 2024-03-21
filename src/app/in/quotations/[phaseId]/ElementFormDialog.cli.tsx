@@ -6,7 +6,7 @@ import {
   DialogContent,
 } from "@/components/ui/dialog"
 import ElementForm from './ElementForm.cli';
-import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
+import CRUDActionsMenu from '@/components/boilerplate/CRUDActionsMenu.cli';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 

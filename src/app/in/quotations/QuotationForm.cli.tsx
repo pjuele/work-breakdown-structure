@@ -23,8 +23,8 @@ import { SelectContent, SelectTrigger, SelectValue, Select, SelectItem }
 import { Textarea } from "@/components/ui/textarea"
 import IdBadge from "@/components/IdBadge.cli"
 import { Project } from "@prisma/client"
-import QuotationKeyCap from "@/components/QuotationKeyCap.cli"
-import AppTitle from "@/components/AppTitle.cli"
+import IconForQuotation from "@/components/IconForQuotation.cli"
+import AppTitle from "@/components/boilerplate/AppTitle.cli"
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -50,7 +50,7 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
         //   }
         name: "",
         description: "",
-        projectId: "PJD",
+        projectId: "",
       },
     })
    
@@ -84,7 +84,7 @@ const QuotationForm = ({ setOpen, allProjects }: {setOpen: any, allProjects: Pro
         <div className="max-w-max bg-slate-950 p-0 m-auto md:m-5 lg:m-10">
             
             <div className="flex flex-row align-middle justify-center gap-2 mb-10 md:mb-10">
-                <QuotationKeyCap />
+                <IconForQuotation />
                 <AppTitle size="xl" title="New Quotation" />
             </div>
             

@@ -4,7 +4,7 @@ import TreeOfDeliverables from "./TreeOfDeliverables.cli";
 import WBSRoot from "./WBSRoot.cli";
 import { isoCurrencyCode } from "@/types";
 import { useEffect, useState } from "react";
-import { Badge } from "./ui/badge";
+import { Badge } from "../../../../components/ui/badge";
 import { Client, Deliverable, Project, ProjectPhase } from "@prisma/client";
 import DeliverableTree from "@/types/DeliverableTree.type";
 
@@ -44,7 +44,7 @@ export default function QuotationTree(
     //   }, []);
 
     return (
-        <div className="flex flex-col align-top gap-10 w-full bg-blue-950">
+        <div className="flex flex-col align-top gap-10 w-full">
             {/* <div className="flex flex-row gap-3 align-top justify-start bg-cyan-800"> */}
                 {/* <Badge variant="outline">{key}</Badge> */}
                 <WBSRoot

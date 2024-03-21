@@ -1,4 +1,4 @@
-import AppMenu from "@/components/AppMenu.cli";
+import AppMenu from "@/components/boilerplate/AppMenu.cli";
 
 export default function wbsLayout({
   children,

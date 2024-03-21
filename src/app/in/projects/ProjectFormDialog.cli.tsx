@@ -1,7 +1,7 @@
 'use client';
 
 import { PlusCircle } from 'lucide-react';
-import CRUDActionsMenu from '@/components/CRUDActionsMenu.cli';
+import CRUDActionsMenu from '@/components/boilerplate/CRUDActionsMenu.cli';
 import {
   Dialog,
   DialogContent,
