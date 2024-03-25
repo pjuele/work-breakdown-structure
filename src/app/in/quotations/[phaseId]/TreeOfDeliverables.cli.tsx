@@ -14,6 +14,9 @@ import { useEffect, useState } from "react";
 import { Element } from "@prisma/client";
 import DeliverableTree from "@/types/DeliverableTree.type";
 import ElementKeyCap from "../../../../components/IconForElement.cli";
+import deliverableTotalHours from "./deliverableTotalHours.function";
+import ElementCard from "./ElementCard.cli";
+import DeliverableCard from "./DeliverableCard.cli";
 
 export default function TreeOfDeliverables(
     {deliverables, hourlyRate, currency}:
@@ -40,11 +43,11 @@ export default function TreeOfDeliverables(
 
 function TheActualTree(
     {deliverables, hourlyRate, currency}:
-    { deliverables: any[], hourlyRate: number, currency: isoCurrencyCode }
+    { deliverables: DeliverableTree[], hourlyRate: number, currency: isoCurrencyCode }
 ) {
     return (
         <div className="flex flex-row align-top justify-flex-start gap-3">
-            {deliverables.map((deliverable: DeliverableTree, index: number) => {
+            {deliverables.map((deliverable, index: number) => {
                 return (
                     <div key={index} className={cn(
                             "flex flex-col gap-3",
@@ -76,86 +79,6 @@ function TheActualTree(
     );
 }
 
-function DeliverableCard(
-    {deliverable, index, hourlyRate, currency}:
-    {
-        deliverable: any,
-        index: number,
-        hourlyRate: number,
-        currency: isoCurrencyCode,
-    }
-) {
-    const [finishedRendering, setFinishedRendering] = useState(false);
-
-    useEffect(() => {
-        setFinishedRendering(true);
-    }, []);
-
-    if (!finishedRendering) return null;
-    console.dir(deliverable, {depth: 10});
-    console.log(typeof deliverable);
-
-    return (
-        <Card key={index} className='bg-slate-950'>
-            <CardHeader>
-                <CardTitle>
-                <div className="flex flex-row gap-1 align-middle min-h-[4rem] max-h-[4rem] overflow-hidden">
-                    <div className="my-auto">
-                        <Package className="inline-flex mr-2" />
-                    </div>
-                    <div className="text-wrap my-auto">
-                        {deliverable.name}
-                    </div>
-                </div>
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-2">
-                {deliverable.startDate &&
-                    <small>Start date: {new Date(deliverable.startDate).toLocaleDateString()}</small>
-                }
-                <div className="flex flex-row gap-1">
-                    <IdBadge id={`${deliverable.totalHours} hs`} />
-                    <IdBadge id={formatCurrencyNumber(deliverable.totalHours * hourlyRate, currency) + ""}/>
-                </div>
-            </CardContent>
-        </Card>
-    );
-}
-
-function ElementCard(
-    {element, hourlyRate, currency, ordinal}:
-    {
-        element: Element,
-        hourlyRate: number,
-        currency: isoCurrencyCode,
-        ordinal?: number,
-    }
-) {
-    return(
-        <Card className="bg-transparent border-0 max-w-full min-w-full">
-            {/* <div className="relative top-[2.9em] left-[-5px]"><ArrowBigRight size={25} /></div> */}
-            <CardHeader className="flex flex-row gap-2 align-middle">
-                {/* <div className="my-auto"><DogPic dogSize={element.size} /></div> */}
-                <CardTitle className="text-wrap my-auto">
-                    <div className="flex flex-row gap-2 align-top justify-center">
-                        {/* <ElementKeyCap /> */}
-                        <div className="max-h-[3em] overflow-y-hidden flex flex-row gap-2">
-                            {ordinal && <IdBadge id={ordinal.toString()} className="inline-flex max-w-min max-h-[1em]"/>}
-                            {element.name.substring(0, 120) + <small> + {((element.name.length > 120) ? "..." : "")} + </small>}
-                        </div>
-                    </div>
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className='flex flex-row flex-wrap gap-1'>
-                    <IdBadge id={dogSizeLegends.get(element.size as DogSize) + ""}/>
-                    <IdBadge id={getDogSizeToHours(element.size as DogSize) + " hs"}/>
-                    <IdBadge id={getDogSizeCostAsString(element.size as DogSize, hourlyRate, currency) + " "}/>
-                </div>
-            </CardContent>
-        </Card>
-    );
-}
 
 // export const TimeLine = ({children}: {children: JSX.Element[]}) => {
 //     return (

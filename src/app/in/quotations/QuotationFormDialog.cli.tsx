@@ -22,10 +22,10 @@ const QuotationFormDialog = (
         [
           {
             icon: <PlusCircle className="hover:animate-pulse"/>,
-            label: "new Phase quotation",
+            label: "new Quotation",
             url: null,
             onClick: (() => setOpen(true)),
-            hotKey: "+",
+            hotKey: "N",
           }
         ]
       } toolbarClassName={toolbarClassName}/>

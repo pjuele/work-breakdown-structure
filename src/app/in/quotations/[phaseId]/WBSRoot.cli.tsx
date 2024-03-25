@@ -9,14 +9,9 @@ import { Client, Project, ProjectPhase } from "@prisma/client";
 import DeliverableTree from "@/types/DeliverableTree.type";
 import { Separator } from "../../../../components/ui/separator";
 import AppTitle from "../../../../components/boilerplate/AppTitle.cli";
+import deliverableTotalHours from "./deliverableTotalHours.function";
+import { DollarSign } from "lucide-react";
 
-function deliverableTotalHours(d: DeliverableTree): number {
-    let totalHours = 0;
-    d.elements.forEach((element) => {
-      totalHours += getDogSizeToHours(element.size as DogSize) || 0;
-    });
-    return totalHours;
-  }
 
 export default function WBSRoot(
     { client, project, phase, deliverables, hourlyRate, currency }:
@@ -37,12 +32,16 @@ export default function WBSRoot(
         totalHours += deliverableTotalHours(deliverable);
     });
     return (
-        <Card className="mx-auto bg-muted w-full md:w-auto">
+        <Card className="p-3 bg-slate-300 dark:bg-slate-600 w-full md:w-max">
             <CardHeader>
                 <div className="flex flex-col gap-3 align-top w-full flex-wrap">
-                    <AppTitle size="2xl" title={phaseName ?? ""} className="ml-0"/>
-                    <div className="prose overflow-clip max-w-auto landscape:max-w-[60vw] mx-auto landscape:mx-3">{phaseDescription}</div>
-                    <Separator className="w-full" />
+                    <div className="flex flex-row gap-3">
+                        <DollarSign size={25} className="inline-flex hover:animate-spin" />
+                        <AppTitle size="xl" title={"Quotation for " + (phaseName ?? "unnamed phase")} className="ml-0"/>
+                    </div>
+                    <div className="prose overflow-clip max-w-auto landscape:max-w-[60vw]">{phaseDescription}</div>
+                    {/* <Separator className="w-full" /> */}
+                    <br/>
                     <ProjectClientBadge
                         project={project}
                         client={client}

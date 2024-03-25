@@ -10,7 +10,7 @@ data[0] =
     id: "VLY",
     name: "Vandelay Industries",
     color: "purple",
-    logoUrl: "/VLY.logo.webp",
+    logoUrl: "/logos/clients/VLY.logo.webp",
     projects: {
       create: [
         {
@@ -38,7 +38,7 @@ data[1] =
     id: "ACM",
     name: "ACME Corp.",
     color: "darkred",
-    logoUrl: "/ACM.logo.webp",
+    logoUrl: "/logos/clients/ACM.logo.webp",
     projects: {
       create: [
         {
@@ -63,7 +63,6 @@ data[1] =
                         create: [
                           {
                             tennantId: WDPJ_CLERK_ID,
-                            // id: 1,
                             name: "Buy chart paper",
                             size: "xs",
                           },
@@ -84,7 +83,6 @@ data[1] =
                         create: [
                           {
                             tennantId: WDPJ_CLERK_ID,
-                            // id: 1,
                             name: "Roller skates",
                             size: "s",
                           },
@@ -120,7 +118,7 @@ data[2] =
     id: "LPH",
     name: "Los Pollos Hermanos",
     color: "yellow",
-    logoUrl: "/LPH.logo.png",
+    logoUrl: "/logos/clients/LPH.logo.png",
   };
 
 data[3] =
@@ -130,7 +128,7 @@ data[3] =
     id: "RIT",
     name: "Responsive IT",
     color: "navy",
-    logoUrl: "/RIT.cli.logo.png",
+    logoUrl: "/logos/clients/RIT.cli.logo.png",
     projects: {
       create: [
         {
@@ -142,11 +140,94 @@ data[3] =
             create: [
               {
                 tennantId: WDPJ_CLERK_ID,
-                name: "Six : Add third location",
+                name: "Phase 7 : Add Third location",
                 description:
                   'Esta fase involucra literalmente el agregar una tercer ciudad ("location") al sistema luego de haber ya establecido MVD y CABA. Ademas, esta estimacion sera utilizada como estimacion generica para pasarle a Daniel como costo de agregar nuevaas ciudades/locations de ahi en mas (con una cota maxima porque llega un volument en el que habria que revisar la arquitectura en Firestore, digamos mas de 10 ciudades).',
                 deliverables: {
-                  create: [],
+                  create: [
+                    {
+                      tennantId: WDPJ_CLERK_ID,
+                      name: "Skeleton & constants",
+                      startDate: randomDate(),
+                      elements: {
+                        create: [
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add constants (locations, questionNames, collectionNames)",
+                            size: "s",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add seeder functionfor QAXXX (skeleton)",
+                            size: "m",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add ethharFlags for XXX",
+                            size: "xs",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add minimal seeder function for songListXXX",
+                            size: "m",
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      tennantId: WDPJ_CLERK_ID,
+                      name: "Playlists",
+                      startDate: randomDate(),
+                      elements: {
+                        create: [
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add XXX handling to checkSetCategoriesFlag",
+                            size: "l",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Import into FF index",
+                            size: "xs",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Add XXX handling to checkFirestoreFlags",
+                            size: "l",
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      tennantId: WDPJ_CLERK_ID,
+                      name: "Other",
+                      startDate: randomDate(),
+                      elements: {
+                        create: [
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Testing (manual or unit-test updates)",
+                            size: "l",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Bugfixes / feedback",
+                            size: "l",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Meetings / email / documentation",
+                            size: "l",
+                          },
+                          {
+                            tennantId: WDPJ_CLERK_ID,
+                            name: "Error margin / unforeseen",
+                            size: "l",
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 },
               },
             ],

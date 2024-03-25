@@ -98,7 +98,7 @@ export default function CRUDActionsMenu(
                         return (
                         <NavigationMenuItem key={index}>
                             <Button
-                                className="max-w-max"
+                                className="max-w-max text-gray-500 dark:text-gray-300 hover:text-foreground hover:dark:text-foreground"
                                 variant={'ghost'}
                                 onClick={() => {
                                     if (action.onClick) {

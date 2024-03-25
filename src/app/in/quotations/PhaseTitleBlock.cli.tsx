@@ -13,7 +13,7 @@ export default function PhaseTitleBlock(
         <>
             <PhaseDropDownMenu phaseId={phase.id} />
         <div key={phase.id} className="flex flex-row gap-5">
-            <div className="relative min-w-24 min-h-24 max-w-24 max-h-24 bg-muted rounded-md">
+            <div className="relative min-w-24 min-h-24 max-w-24 max-h-24 dark:bg-muted rounded-md">
                 <Image
                     src={client.logoUrl}
                     alt={client.name ?? "client logo"}

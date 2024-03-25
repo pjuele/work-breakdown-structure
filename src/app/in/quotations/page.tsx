@@ -22,16 +22,13 @@ export default async function Home() {
     const { phases, projects } = await getData();
   return (
     <section className="p-3 flex flex-col gap-5 wrap">
-      {/* <div className="flex landscape:flex-row portrait:flex-col gap-1 align-middle justify-evenly mx-auto"> */}
-        <AppTitle size="xl" title="Project-phase Quotations"
-          className="mx-auto" />
-        <QuotationFormDialog allProjects={projects} />
-      {/* </div> */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"> */}
+      <AppTitle size="xl" title="Project-phase Quotations"
+        className="mx-auto" />
+      <QuotationFormDialog allProjects={projects} />
       <div className="flex flex-row flex-wrap justify-stretch gap-5">
         {phases.length === 0 && (
           <div className="p-5 w-64 border-[1px]border-muted text-muted-foreground text-xs rounded-md">
-            <p>You have not entered any Project-phase quotations yet! To add one, click on the + button above!</p>
+            <p>You have not entered any Project-phase quotations yet. To add one, click on the + button above!</p>
           </div>
         )}
         {phases.map((phase, index) => (

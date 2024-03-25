@@ -34,7 +34,7 @@ const DeliverableFormDialog = ({phaseId}: {phaseId: number}) => {
       <Dialog open={open} onOpenChange={setOpen} modal>
         <DialogContent className={
           cn(
-            "p-0 md:p-5",
+            "",
             "w-full h-full max-w-screen max-h-screen",
             "md:w-auto md:h-auto md:max-w-auto md:max-h-auto",
           )}>

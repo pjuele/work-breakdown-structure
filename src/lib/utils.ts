@@ -20,7 +20,7 @@ export function fxConvertAmount(
   if (!fromAmount || !toAmount) {
     return null;
   }
-  return Math.floor((amount * fromAmount) / toAmount);
+  return Math.floor((amount / fromAmount) * toAmount);
 }
 
 export function pad(num: number, size: number): string {
